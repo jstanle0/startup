@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Shoot for the Stars - A goal-based self motivation website
 
 
 > [!NOTE]
@@ -26,7 +26,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Many of us have a lot of different things that we want to get done, but lack the self-motivation to complete it. Shoot for the Stars is a solution to that! Just pick a thing you want, and Shoot for the Stars will help you use it as a motivator to achieve your goals and start good habits. With a simple and intuitve design, it'll keep you coming back until you achieve everything you'd hoped, if not more!
 
 ### Design
 
@@ -43,20 +43,26 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- __Treat yourself!__ Pick a reward, write a discription of it, add a photo -- Whatever helps you remember why your're achieving your goals.
+- __Set goals!__ Set goals to earn stars, with customization for repeating or long-term goals.
+- __Share with friends!__ Proud of your achivements? Post them to the community on the community board!
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Uses correct HTML structures to create a login, home, and community page
+- **CSS** - Simplistic, appealing application design that adapts to a variety of screen sizes
+- **React** - Dynamically rendered goal, reward, and community elements, as well as login system
+- **Service** - Backend service components including:
+    - Placeholder images for users that don't want to upload their own
+    - Secure password management
+    - Other necessary site functions :grin:
+- **DB/Login** - Securly store:
+    - User login information
+    - The goals, rewards, and star values of each account
+    - Community posts for a certain amount of time
+- **WebSocket** - Live updates to the community board
 
 ## 🚀 AWS deliverable
 
