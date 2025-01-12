@@ -41,7 +41,7 @@ sequenceDiagram
     actor Bill
     actor Susan
     actor Tom
-    Server
+    participant Server
     Bill ->> Server: Bill's post
     Server ->> Susan: Bill's post
     Server ->> Tom: Bill's post
