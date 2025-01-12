@@ -1,8 +1,8 @@
-# Your startup name here
+# Shoot for the Stars
 
 [My Notes](notes.md)
 
-Shoot for the Stars - A goal-based self motivation website
+A goal-based self motivation website
 
 
 > [!NOTE]
@@ -30,15 +30,21 @@ Many of us have a lot of different things that we want to get done, but lack the
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](/assets/images/sketch1.jpeg)
+![Design image 2](/assets/images/sketch2.jpeg)
+![Design image 3](/assets/images/sketch3.jpeg)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+As can be seen in these images, there will be 3 main pages. A simple login page, a home page, and a community page. Each can be accessed by a bar on the top of the screen. Attempting to use the home page without logging in will redirect the user to the login page. On the home page, the individual elements will be dynamically rendered, as the user enters them, as react elements. There will also be a star counter that automatically updates as the user completes goals. The community page will use the same goal/reward elements as the home page, just changed slightly to show that it has been achieved and a space to write a note.  
+This diagram represents how the server recieves and resends community posts.
 ```mermaid
 sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
+    actor Bill
+    actor Susan
+    actor Tom
+    Server
+    Bill ->> Server: Bill's post
+    Server ->> Susan: Bill's post
+    Server ->> Tom: Bill's post
 ```
 
 ### Key features
