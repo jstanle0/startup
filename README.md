@@ -63,6 +63,7 @@ I am going to use the required technologies in the following ways.
 - **Service** - Backend service components including:
     - Placeholder images for users that don't want to upload their own
     - Secure password management
+    - Use an IP address locator to display nearby community posts
     - Other necessary site functions :grin:
 - **DB/Login** - Securly store:
     - User login information
@@ -80,15 +81,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - 4 HTML pages integrated - login (index), about, community, and main (accessed through clicking the star or login button)
+- [x] **Proper HTML element usage** - Header, footer, and body present on all pages. Features a number of tables and imput options as well.
+- [x] **Links** - Links connect all pages together correctly.
+- [x] **Text** - There is text on the about page, as well as placeholder text representing future features, like community posts
+- [x] **3rd party API placeholder** - Will use 3rd party ip address locator to find community posts from people nearby
+- [x] **Images** - Placeholder images have been uploaded for the logo as well as possible options for rewards
+- [x] **Login placeholder** - Placeholder to imput username and password, as well as a placeholder to welcome the user after signin.
+- [x] **DB data placeholder** - Placeholders for star count and goals, which will be stored in the database
+- [x] **WebSocket placeholder** - Placeholder for community posts, which will serve as real time websocket communication
 
 ## 🚀 CSS deliverable
 
