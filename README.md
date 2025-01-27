@@ -88,7 +88,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **3rd party API placeholder** - Will use 3rd party ip address locator to find community posts from people nearby
 - [x] **Images** - Placeholder images have been uploaded for the logo as well as possible options for rewards
 - [x] **Login placeholder** - Placeholder to imput username and password, as well as a placeholder to welcome the user after signin.
-- [x] **DB data placeholder** - Placeholders for star count and goals, which will be stored in the database
+- [x] **DB data placeholder** - Placeholders for star count and goals, as well as login information, all of which will be stored in the DB
 - [x] **WebSocket placeholder** - Placeholder for community posts, which will serve as real time websocket communication
 
 ## 🚀 CSS deliverable

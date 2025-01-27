@@ -1,6 +1,6 @@
 # CS 260 Notes
 
-[My startup](https://shootforthestars.click/)
+[My startup](https://startup.shootforthestars.click/)
 
 ## Helpful links
 
