@@ -4,14 +4,7 @@
     font-family: "Zain", serif;
     background-color: aliceblue;
     color: black;
-    padding:0;
-    
 }
-header > *, header > * > *, header > * > * > * {
-    background-color: cornflowerblue;
-    color: oldlace;
-}
-
 a {
     color: blueviolet;
 }
