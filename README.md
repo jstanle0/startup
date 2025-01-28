@@ -82,7 +82,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **HTML pages** - 4 HTML pages integrated - login (index), about, community, and main (accessed through clicking the star or login button)
-- [x] **Proper HTML element usage** - Header, footer, and body present on all pages. Features a number of tables and imput options as well.
+- [x] **Proper HTML element usage** - Header, footer, and main present on all pages. Features a number of tables and imput options as well.
 - [x] **Links** - Links connect all pages together correctly.
 - [x] **Text** - There is text on the about page, as well as placeholder text representing future features, like community posts
 - [x] **3rd party API placeholder** - Will use 3rd party ip address locator to find community posts from people nearby
