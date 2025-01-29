@@ -2,9 +2,15 @@
 
 * {
     font-family: "Zain", serif;
-    background-color: aliceblue;
-    color: black;
+    background-color: #FAFAFF;
+    color: #0a0908;
+}
+header *, footer * {
+    background-color: #00cc66;
+}
+h1 {
+    color: #F1C40F
 }
 a {
-    color: blueviolet;
+    color: #DA627D;
 }
