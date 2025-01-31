@@ -11,5 +11,5 @@ main {
     box-shadow: 3px 3px 2px #0a0908;
 }
 .content-container * {
-    background-color: #F1C40F;
+    background-color: transparent;
 }
