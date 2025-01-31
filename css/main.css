@@ -4,12 +4,47 @@
     font-family: "Zain", serif;
     background-color: #FAFAFF;
     color: #0a0908;
+    margin:0
 }
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+header {
+    min-height: 50px;
+}
+footer {
+    min-height: 24px;
+}
+main {
+    flex: 1;
+}
+.aligned-header {
+    display: flex;
+}
+.aligned-header * {
+    flex: 1 0 230px;
+    align-self: center;
+}
+.aligned-header nav a {
+    padding: .25em;
+    border: 2px solid #0ea55a;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 125%;
+}
+.aligned-header nav a:hover{
+    background-color: #0ea55a;
+    color:#FAFAFF;
+}
+
 header *, footer * {
-    background-color: #00cc66;
+    background-color: #00CC66;
 }
 h1 {
-    color: #F1C40F
+    color: #F1C40F;
+    
 }
 a {
     color: #DA627D;
