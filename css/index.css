@@ -1,0 +1,14 @@
+main {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+.content-container { 
+    background-color: #F1C40F;
+    border: solid .5em #0ea55a;
+    border-radius: 15px;
+    padding: 1em;
+}
+.content-container * {
+    background-color: #F1C40F;
+}
