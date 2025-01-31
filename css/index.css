@@ -8,6 +8,7 @@ main {
     border: solid .5em #0ea55a;
     border-radius: 15px;
     padding: 1em;
+    box-shadow: 3px 3px 2px #0a0908;
 }
 .content-container * {
     background-color: #F1C40F;

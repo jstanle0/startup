@@ -15,13 +15,14 @@ header {
     min-height: 50px;
 }
 footer {
-    min-height: 24px;
+    min-height: 40px;
 }
 main {
     flex: 1;
 }
 .aligned-header {
     display: flex;
+    padding: 1em;
 }
 .aligned-header * {
     flex: 1 0 230px;
@@ -41,6 +42,9 @@ main {
 
 header *, footer * {
     background-color: #00CC66;
+}
+footer p {
+    padding: 1em;
 }
 h1 {
     color: #F1C40F;
