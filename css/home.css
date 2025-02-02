@@ -1,0 +1,18 @@
+main {
+    display: grid;
+}
+main * {
+    justify-self: center;
+}
+.star-counter {
+    background-color: #DA627D;
+    margin: .5em; 
+    padding: .5em; 
+    border:solid 2px #0a0908; 
+    border-radius:1em;
+    font-size: 1.5em;
+}
+.star-counter * {
+    background-color: #DA627D;
+    color: #F1C40F;
+}
