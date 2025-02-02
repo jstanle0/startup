@@ -13,3 +13,9 @@ main {
 .content-container * {
     background-color: transparent;
 }
+button {
+    border-color: #0ea55a;
+    background-color: #DA627D;
+    font-size: 1.5em;
+    margin-top: .5em;
+}
