@@ -16,3 +16,20 @@ main * {
     background-color: #DA627D;
     color: #F1C40F;
 }
+table th, td {
+    border:solid 2px #0a0908; 
+    background-color: #00CC66;
+    font-size: 1.5em;
+}
+table {
+    border-collapse: collapse;
+}
+button {
+    border-color: #0ea55a;
+    background-color: #DA627D;
+    font-size: 1.25em;
+    margin-top: .5em;
+}
+.embedded-table tr td {
+    border: none;
+}

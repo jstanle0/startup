@@ -2,6 +2,7 @@
 <html lang="en"></html>
 <head>
     <title>Main</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/main.css"/>
     <link rel="stylesheet" href="../css/home.css" />
     <link rel="icon" type="image/x-icon" href="../assets/images/star.png"/> 
@@ -53,30 +54,41 @@
             <tr>
                 <!--Images-->
                 <td>
-                    <table>
+                    <table class="embedded-table">
                         <tr>
                             <td> <img src="../assets/images/ferrari.jpeg" alt="ferrari" height="75"/> </td>
                             <td> <img src="../assets/images/lawnmower.jpeg" alt="lawnmower" height="75"/> </td>
                         </tr>
                         <tr>
                             <td> <img src="../assets/images/camera.jpeg" alt="camera" width="75"/> </td>
-                            <td> <input type="file" name="file"/> </td>
+                            <td> 
+                                <div class="mb-3">
+                                    <input class="form-control" type="file" id="formFile">
+                                </div>
+                            </td>
                         </tr>
                     </table>
                 </td>
                 <!--Input for title-->
                 <td>
-                    <input placeholder="title"/>
+                    <div class="form-floating">
+                        <input id="floatingInput" class="form-control" placeholder="Title"/>
+                        <label for="floatingInput" style="opacity: .5;background-color: transparent;">Title</label>
+                    </div>
                 </td>
                 <!--Input for description-->
                 <td>
-                    <input placeholder="description"/>
+                    <div class="form-floating">
+                        <input id="floatingInput" class="form-control" placeholder="Description"/>
+                        <label for="floatingInput" style="opacity: .5;background-color: transparent;">Description</label>
+                    </div>
                 </td>
             </tr>
         </table>
-        <button>Create Reward!</button>
+        <button style="margin: .5em;">Create Reward!</button>
     </main>
     <footer>
         <p>Author Name: <a href="https://github.com/jstanle0/startup.git">Joshua Stanley</a></p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
