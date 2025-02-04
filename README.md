@@ -95,12 +95,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - Header, footer, and body have distinctive colors, in a flex box to maintain their positioning
+- [x] **Navigation elements** - Navigation elements are aligned and change colors when hovered over
+- [x] **Responsive to window resizing** - Flex/grid elements resize automatically, and the header reduces the amount of content on smaller screen sizes
+- [x] **Application elements** - Each element contains common colors and styles across the different pages
+- [x] **Application text content** - Imported a font to use, as well as a variety of text colors and sizes
+- [x] **Application images** - Images were styled with simply borders and border radiuses to match with the page
 
 ## 🚀 React part 1: Routing deliverable
 
