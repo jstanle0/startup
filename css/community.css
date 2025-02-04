@@ -1,20 +1,21 @@
 main {
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    align-items: center;
+
 }
 .content-container {
     display: grid;
-    grid-auto-columns: minmax(300px, auto);
+    min-width: 1vw;
+    grid-template-columns: repeat(auto-fit, 400px);
     gap: 10px;
-    grid-auto-rows: minmax(300px, auto);
-    align-items: start;
+    grid-auto-rows: minmax(100px, auto);
+    margin: .5em;
 }
 .post {
     border: solid 2px #0a0908;
     border-radius: .5em;
     background-color: #00CC66;
+    max-width: 400px;
 }
 .post tr td {
     background-color:#00CC66;
@@ -24,10 +25,11 @@ main {
     border-radius: .5em;
     background-color: #F1C40F;
 }
-.post tr td img {
+.post img {
     border-radius: .5em;
+    border: solid 2px #0a0908;
 }
-.post tr td p {
+.post p {
     background-color: #00CC66;
     color: #DA627D;
 }
