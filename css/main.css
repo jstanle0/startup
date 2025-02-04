@@ -65,3 +65,9 @@ a {
 ul {
     font-size: 1.5em;
 }
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    h1 {
+        display: none;
+    }
+  }

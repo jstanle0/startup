@@ -6,9 +6,10 @@ main {
 }
 .content-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-auto-columns: minmax(300px, auto);
     gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
+    grid-auto-rows: minmax(300px, auto);
+    align-items: start;
 }
 .post {
     border: solid 2px #0a0908;
@@ -30,3 +31,9 @@ main {
     background-color: #00CC66;
     color: #DA627D;
 }
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .content-container {
+        display: block;
+    }
+  }
