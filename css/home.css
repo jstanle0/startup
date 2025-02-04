@@ -1,9 +1,10 @@
-main {
-    display: grid;
+.content-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: .5em;
+    align-items: center;
 }
-main * {
-    justify-self: center;
-}
+
 .star-counter {
     background-color: #DA627D;
     margin: .5em; 
@@ -11,6 +12,14 @@ main * {
     border:solid 2px #0a0908; 
     border-radius:1em;
     font-size: 1.5em;
+    max-width: 225px;
+    align-self: flex-end;
+    position: sticky;
+    top: 50px;
+    opacity: .9;
+}
+.star-counter:hover {
+    opacity: .5;
 }
 .star-counter * {
     background-color: #DA627D;
@@ -32,4 +41,7 @@ button {
 }
 .embedded-table tr td {
     border: none;
+}
+.embedded-table img {
+    border-radius: .25em;
 }
