@@ -2,7 +2,7 @@ import React from 'react';
 import './login.css'
 
 export function Login() {
-    return <main className="form-signin w-100 m-auto">
+    return <main className="form-signin w-100 m-auto login-main">
     <div className="content-container">
         <form>
             <h3>Welcome to Shoot for the Stars!!</h3>
@@ -14,7 +14,7 @@ export function Login() {
                 <input id="floatingPassword" className="form-control" placeholder="Password"/>
                 <label for="floatingPassword">Password</label>
             </div>
-            <a href="html/main.html"><button>Login</button></a>
+            <button class="loginButton">Login</button>
         </form>
     </div>
 </main>;

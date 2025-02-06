@@ -1,9 +1,9 @@
-main {
+.community-main {
     display: flex;
     flex-direction: column;
     margin-left: .5em;
 }
-.content-container {
+.community-content-container {
     display: grid;
     min-width: 1vw;
     grid-template-columns: repeat(auto-fit, 400px);
@@ -11,25 +11,28 @@ main {
     grid-auto-rows: minmax(100px, auto);
     margin: .5em;
 }
-.post {
+.post-body {
     border: solid 2px #0a0908;
     border-radius: .5em;
     background-color: #00CC66;
     max-width: 400px;
+    display: flex;
+    align-items: center;
 }
-.post tr td {
-    background-color:#00CC66;
-}
-.post caption {
+.post-name {
     border: solid 2px #0a0908;
     border-radius: .5em;
     background-color: #F1C40F;
+    font-size: 1.25em;
+    text-align: center;
 }
-.post img {
+.post-body img {
     border-radius: .5em;
     border: solid 2px #0a0908;
+    width: 200px;
+    margin: .5em;
 }
-.post p {
+.post-body p {
     background-color: #00CC66;
     color: #DA627D;
 }

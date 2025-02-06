@@ -1,4 +1,4 @@
-main {
+.login-main {
     display: grid;
     align-content: center;
     justify-content: center;
@@ -13,7 +13,7 @@ main {
 .content-container * {
     background-color: transparent;
 }
-button {
+.loginButton {
     border-color: #0ea55a;
     background-color: #DA627D;
     font-size: 1.5em;
