@@ -9,22 +9,24 @@ import { Home } from './home/home';
 import { Login } from './login/login';
 
 export default function App() {
-  return <div className='app'>
-    <Header />
-    <Main />
-    <Footer />
-  </div>;
+  return <BrowserRouter>
+    <div className='app'>
+        <Header />
+        <Main />
+        <Footer />
+    </div>
+  </BrowserRouter>;
 }
 
 function Header() {
     return <header>
         <div className="aligned-header">
-            <a href="../html/main.html" className="logo"><img src="../public/images/logo.png" alt="logo" height="75"/></a>
+            <NavLink to="/home" className="logo"><img src="/images/logo.png" alt="logo" height="75"/></NavLink>
             <h1>Shoot for the Stars!</h1>
             <nav>
-                <a href="../index.html">Login</a> 
-                <a href="../html/about.html">About</a> 
-                <a href="../html/community.html">Community</a> 
+                <NavLink to="" className="nav-element">Login</NavLink> 
+                <NavLink to="about" className="nav-element">About</NavLink> 
+                <NavLink to="community" className="nav-element">Community</NavLink> 
             </nav>
         </div> 
     </header>;
@@ -37,5 +39,17 @@ function Footer() {
 }
 
 function Main() {
-    return ;
+    return <Routes>
+    <Route path='/' element={<Login />} exact />
+    <Route path='/community' element={<Community />} />
+    <Route path='/home' element={<Home />} />
+    <Route path='/about' element={<About />} />
+    <Route path='*' element={<NotFound />} />
+  </Routes>;
 }
+
+function NotFound() {
+    return <main>
+        <p>404: Return to sender. Address unknown.</p>
+        </main>;
+  }
