@@ -5,14 +5,15 @@ import './app.css';
 export default function App() {
   return <div className='app'>
     <Header />
+    <Main />
     <Footer />
   </div>;
 }
 
 function Header() {
     return <header>
-        <div class="aligned-header">
-            <a href="../html/main.html" class="logo"><img src="../public/images/logo.png" alt="logo" height="75"/></a>
+        <div className="aligned-header">
+            <a href="../html/main.html" className="logo"><img src="../public/images/logo.png" alt="logo" height="75"/></a>
             <h1>Shoot for the Stars!</h1>
             <nav>
                 <a href="../index.html">Login</a> 
@@ -27,4 +28,8 @@ function Footer() {
     return <footer>
         <p>Author Name: <a href="https://github.com/jstanle0/startup.git">Joshua Stanley</a></p>
     </footer>;
+}
+
+function Main() {
+    return ;
 }
