@@ -5,6 +5,7 @@ import './app.css';
 export default function App() {
   return <div className='app'>
     <Header />
+    <Footer />
   </div>;
 }
 
@@ -20,4 +21,10 @@ function Header() {
             </nav>
         </div> 
     </header>;
+}
+
+function Footer() {
+    return <footer>
+        <p>Author Name: <a href="https://github.com/jstanle0/startup.git">Joshua Stanley</a></p>
+    </footer>;
 }
