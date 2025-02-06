@@ -30,9 +30,9 @@ Many of us have a lot of different things that we want to get done, but lack the
 
 ### Design
 
-![Design image](/assets/images/sketch1.jpeg)
-![Design image 2](/assets/images/sketch2.jpeg)
-![Design image 3](/assets/images/sketch3.jpeg)
+![Design image](/public/images/sketch1.jpeg)
+![Design image 2](/public/images/sketch2.jpeg)
+![Design image 3](/public/images/sketch3.jpeg)
 
 As can be seen in these images, there will be 3 main pages. A simple login page, a home page, and a community page. Each can be accessed by a bar on the top of the screen. Attempting to use the home page without logging in will redirect the user to the login page. On the home page, the individual elements will be dynamically rendered, as the user enters them, as react elements. There will also be a star counter that automatically updates as the user completes goals. The community page will use the same goal/reward elements as the home page, just changed slightly to show that it has been achieved and a space to write a note.  
 This diagram represents how the server recieves and resends community posts.
