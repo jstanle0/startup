@@ -35,6 +35,11 @@ main {
 .aligned-header * {
     flex: 1 0 230px;
     align-self: center;
+    text-align: center;
+}
+nav {
+    display: flex;
+    justify-content: center;
 }
 .nav-element {
     padding: .25em;
@@ -43,6 +48,7 @@ main {
     text-decoration: none;
     font-size: 125%;
     margin: .25em;
+    flex: 0 1 50px
 }
 .nav-element:hover{
     background-color: #0ea55a;
@@ -67,7 +73,8 @@ ul {
     font-size: 1.5em;
 }
 .logo {
-    flex: 1 0 50px;
+    flex: 1 1 230px;
+    text-align: left;
 }
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */

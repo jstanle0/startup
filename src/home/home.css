@@ -1,4 +1,4 @@
-.content-container {
+.home-content-container {
     display: flex;
     flex-direction: column;
     margin-left: .5em;
@@ -25,19 +25,49 @@
     background-color: #DA627D;
     color: #F1C40F;
 }
-table th, td {
+.goal-container {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+}
+.item-wrapper {
     border:solid 2px #0a0908; 
     background-color: #00CC66;
     font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 150px;
+    border-radius: .25em;
+    margin: .5em
 }
-table {
-    border-collapse: collapse;
+.goal-title {
+    background-color: #F1C40F;
+    border-bottom:solid 1px #0a0908a3;
+    width: 145px;
+    text-align: center;
+    border-radius: .15em;
 }
-button {
+.goal-caption {
+    background-color: #00CC66;
+    border-bottom:solid 1px #0a0908a3;
+    width: 145px;
+    text-align: center;
+}
+.goal-counter img, text {
+    background-color: #00CC66;
+    align-self: center;
+}
+.goal-counter {
+    background-color: #00CC66;
+    width: 145px;
+    display: flex;
+    justify-content: center;
+}
+.submit-button {
     border-color: #0ea55a;
     background-color: #DA627D;
-    font-size: 1.25em;
-    margin-top: .5em;
+    font-size: 1em;
 }
 .embedded-table tr td {
     border: none;
