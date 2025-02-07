@@ -54,6 +54,7 @@ header *, footer * {
 }
 footer p {
     padding: 1em;
+    margin: 0;
 }
 h1 {
     color: #F1C40F;
