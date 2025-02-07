@@ -15,7 +15,8 @@
 }
 .loginButton {
     border-color: #0ea55a;
-    background-color: #DA627D;
+    background-color: #00CC66;
+    color: #FAFAFF;
     font-size: 1.5em;
     margin-top: .5em;
 }
