@@ -6,10 +6,11 @@ export function Home() {
     <div className="home-content-container">
         <span className="star-counter"><img src="/images/star.png" alt="star" height="20"/> Number of stars: <b>35</b></span>
         <h3>Welcome [username]!</h3>
+        <Reward image="/images/ferrari.jpeg" title="Ferrari" caption="Don't you want a ferrari??"/>
+        <button className="btn btn-secondary btn-lg">Create Reward!</button>
         <h3>Current Goals Placeholder</h3>
         <CurrentGoals/>
-        <button type="button" className="btn btn-outline-primary">Primary</button>
-        <button className="submit-button">Create Reward!</button>
+        <button type="button" className="btn btn-primary btn-lg">Create new Goal!</button>
     </div>
 </main>;
 }
@@ -25,8 +26,24 @@ function Goal({name, timeframe, starvalue}) {
       <div className='goal-title'>{name}</div>
       <div className='goal-caption'>{timeframe}</div>
       <div className='goal-counter'><img alt="star" src="/images/star.png" height="15" /><text>{starvalue}</text></div>
-      <button className='submit-button'>Complete!</button>
+      <button className='btn btn-outline-secondary'>Complete!</button>
     </div>
+}
+function Reward({image, title, caption}) {
+  return <div className='card bg-primary-subtle'>
+    <img src={image} className="card-img-top" alt="reward image"/>
+    <div className="card-body bg-warning">
+    <h5 className="card-title bg-warning">{title}</h5>
+    <p className="card-text bg-warning">{caption}</p>
+    <p className="card-text bg-warning">35/70 <img alt="star" src="/images/star.png" height="15" className='bg-warning'></img></p>
+      <div className="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+      <div className="progress-bar w-50"></div>
+   
+
+    </div>
+  </div>
+
+  </div>
 }
 /*
 <table>
