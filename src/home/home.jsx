@@ -8,6 +8,7 @@ export function Home() {
         <h3>Welcome [username]!</h3>
         <h3>Current Goals Placeholder</h3>
         <CurrentGoals/>
+        <button type="button" className="btn btn-outline-primary">Primary</button>
         <button className="submit-button">Create Reward!</button>
     </div>
 </main>;
