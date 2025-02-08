@@ -32,7 +32,7 @@ function Goal({name, timeframe, starvalue}) {
 function Reward({image, title, caption}) {
   return <div className='card bg-primary-subtle'>
     <img src={image} className="card-img-top" alt="reward image"/>
-    <div className="card-body bg-warning">
+    <div className="card-body bg-warning rounded-bottom">
     <h5 className="card-title bg-warning">{title}</h5>
     <p className="card-text bg-warning">{caption}</p>
     <p className="card-text bg-warning">35/70 <img alt="star" src="/images/star.png" height="15" className='bg-warning'></img></p>
@@ -46,25 +46,7 @@ function Reward({image, title, caption}) {
   </div>
 }
 /*
-<table>
-            <tr>
-                <th>Name |</th>
-                <th>Timeframe |</th>
-                <th># of <img src="../assets/images/star.png" alt="star" height="15"/></th> 
-            </tr>
-            <tr>
-                <td>Mow Lawn |</td>
-                <td>This week |</td>
-                <td>5</td>
-                <td><button>Complete!</button></td>
-            </tr>
-            <tr>
-                <td>Do CS260 HW |</td>
-                <td>Today |</td>
-                <td>3</td>
-                <td><button>Complete!</button></td>
-            </tr>
-        </table>
+This is some HTML that I'm going to cannibalize for pop-up menus:
         <h3>Create Reward Placeholder</h3>
         <table>
             <tr>
