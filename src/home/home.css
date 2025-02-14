@@ -77,3 +77,8 @@
 .embedded-table img {
     border-radius: .25em;
 }
+.currentGoals {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

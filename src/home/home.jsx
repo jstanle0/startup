@@ -1,4 +1,5 @@
 import React from 'react';
+import { CurrentGoals } from './goals';
 import './home.css';
 
 export function Home() {
@@ -10,39 +11,22 @@ export function Home() {
         <button className="btn btn-secondary btn-lg">Create Reward!</button>
         <h3>Current Goals Placeholder</h3>
         <CurrentGoals/>
-        <button type="button" className="btn btn-primary btn-lg">Create new Goal!</button>
+        
     </div>
 </main>;
 }
-function CurrentGoals(){
-    return <div className='goal-container'>
-      <Goal name="Mow Lawn" timeframe="This week" starvalue="5"/>
-      <Goal name="Do CS260 HW" timeframe="Today" starvalue="3"/>
-      <Goal name="Complete React Deliverable" timeframe="Tomorrow" starvalue="4"/>
-    </div>;
-}
-function Goal({name, timeframe, starvalue}) {
-    return <div className='item-wrapper'>
-      <div className='goal-title'>{name}</div>
-      <div className='goal-caption'>{timeframe}</div>
-      <div className='goal-counter'><img alt="star" src="/images/star.png" height="15" /><text>{starvalue}</text></div>
-      <button className='btn btn-outline-secondary'>Complete!</button>
-    </div>
-}
+
 function Reward({image, title, caption}) {
   return <div className='card bg-primary-subtle'>
     <img src={image} className="card-img-top" alt="reward image"/>
     <div className="card-body bg-warning rounded-bottom">
-    <h5 className="card-title bg-warning">{title}</h5>
-    <p className="card-text bg-warning">{caption}</p>
-    <p className="card-text bg-warning">35/70 <img alt="star" src="/images/star.png" height="15" className='bg-warning'></img></p>
-      <div className="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-      <div className="progress-bar w-50"></div>
-   
-
+        <h5 className="card-title bg-warning">{title}</h5>
+        <p className="card-text bg-warning">{caption}</p>
+        <p className="card-text bg-warning">35/70 <img alt="star" src="/images/star.png" height="15" className='bg-warning'></img></p>
+        <div className="progress" role="progressbar" aria-label="Basic example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+            <div className="progress-bar w-50"></div>
+        </div>
     </div>
-  </div>
-
   </div>
 }
 /*
