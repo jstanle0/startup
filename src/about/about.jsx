@@ -2,8 +2,12 @@ import React from 'react';
 import './about.css'
 
 export function About() {
+    const [imageSrc, changeImageSrc] = React.useState("loading...")
+    React.useEffect( () => {
+        changeImageSrc("/images/space.jpeg")
+    }, []);
     return <main className='aboutMain'>
-    <img alt="Space" src="/images/space.jpeg"/>
+    <img alt="Space" src={imageSrc}/>
     <h3>About:</h3>
     <p>
     Many of us have a lot of different things that we want to get done, but lack the self-motivation to complete it. Shoot for the Stars is a solution to that! Just pick a thing you want, and Shoot for the Stars will help you use it as a motivator to achieve your goals and start good habits. With a simple and intuitve design, it'll keep you coming back until you achieve everything you'd hoped, if not more!
