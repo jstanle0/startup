@@ -34,31 +34,48 @@ function ExampleModal (props) {
       function closeModal() {
         setIsOpen(false);
       }
+
+      const customStyles = {
+        content: {
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#FAFAFF',
+        },
+      };
     
-      function afterOpenModal() {
+      /*function afterOpenModal() {
         // references are now sync'd and can be accessed.
         subtitle.style.color = '#f00';
-      }
+      }*/
   return (
     <div>
     <button type="button" className="btn btn-primary btn-lg" style={{"maxWidth": "200px"}} onClick={openModal}>Create new Goal!</button>
       <Modal
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
+        //onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
-        //style={customStyles}
+        style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
         <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
+            <div class="mb-3">
+                <label for="goalInput" class="form-label">Goal</label>
+                <input type="goal" class="form-control" id="goalInput"/>
+            </div>
+            <div class="mb-3">
+                <label for="descriptionInput" class="form-label">Description</label>
+                <input type="description" class="form-control" id="descriptionInput"/>
+            </div>
+            <div class="mb-3">
+                <label for="starCountInput" class="form-label">Star Count</label>
+                <input type="number" class="form-control" id="starCountInput"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
       </Modal>
       </div>
   );
