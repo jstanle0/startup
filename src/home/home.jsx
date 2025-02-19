@@ -1,6 +1,9 @@
 import React from 'react';
+import Modal from 'react-modal'
 import { CurrentGoals } from './goals';
 import './home.css';
+
+Modal.setAppElement(document.getElementById('root'));
 
 export function Home() {
     return <main>
@@ -11,7 +14,6 @@ export function Home() {
         <button className="btn btn-secondary btn-lg">Create Reward!</button>
         <h3>Current Goals Placeholder</h3>
         <CurrentGoals/>
-        
     </div>
 </main>;
 }
@@ -29,6 +31,7 @@ function Reward({image, title, caption}) {
     </div>
   </div>
 }
+
 /*
 This is some HTML that I'm going to cannibalize for pop-up menus:
         <h3>Create Reward Placeholder</h3>

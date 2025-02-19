@@ -10,7 +10,7 @@ import { Login } from './login/login';
 
 export default function App() {
   return <BrowserRouter>
-    <div className='app'>
+    <div className='app' id='app'>
         <Header />
         <Main />
         <Footer />
