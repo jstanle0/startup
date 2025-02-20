@@ -66,6 +66,8 @@ export function CurrentGoals(){
           // references are now sync'd and can be accessed.
           subtitle.style.color = '#f00';
         }*/
+       const handleSubmit = (name, description, count) => addGoal(new Goal(name, description, count))
+  
     return (
       <div>
       <button type="button" className="btn btn-primary btn-lg" style={{"maxWidth": "200px"}} onClick={openModal}>Create new Goal!</button>
@@ -76,7 +78,7 @@ export function CurrentGoals(){
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <form>
+          <form >
               <div className="mb-3">
                   <label for="goalInput" className="form-label">Goal</label>
                   <input type="goal" className="form-control" id="goalInput"/>
@@ -89,7 +91,7 @@ export function CurrentGoals(){
                   <label for="starCountInput" className="form-label">Star Count</label>
                   <input type="number" className="form-control" id="starCountInput"/>
               </div>
-              <button type="submit" className="btn btn-primary">Submit</button>
+              <button type="submit" className="btn btn-primary" onClick={()=>handleSubmit("a", "b", 3)}>Submit</button>
               </form>
         </Modal>
         </div>
