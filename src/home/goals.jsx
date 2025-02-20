@@ -1,29 +1,30 @@
 import React from "react";
-import Modal from 'react-modal'
+import Modal from 'react-modal';
+import {Goal} from './goal'
 
 export function CurrentGoals(){
     
     return <div className="currentGoals">
         <div className='goal-container'>
-        <Goal name="Mow Lawn" timeframe="This week" starvalue="5"/>
-        <Goal name="Do CS260 HW" timeframe="Today" starvalue="3"/>
-        <Goal name="Complete React Deliverable" timeframe="Tomorrow" starvalue="4"/>
+        <DisplayedGoal goal={new Goal("Mow Lawn", "This week", 5)}/>
+        <DisplayedGoal goal={new Goal("Do CS260 HW","Today","3")}/>
+        <DisplayedGoal goal={new Goal("Complete React Deliverable","Tomorrow","4")}/>
         </div>
         
-        <ExampleModal />
+        <GoalModal />
     </div>
 }
-function Goal({name, timeframe, starvalue}) {
+function DisplayedGoal({goal}) {
     return <div className='item-wrapper'>
-      <div className='goal-title'>{name}</div>
-      <div className='goal-caption'>{timeframe}</div>
-      <div className='goal-counter'><img alt="star" src="/images/star.png" height="15" /><text>{starvalue}</text></div>
+      <div className='goal-title'>{goal.name}</div>
+      <div className='goal-caption'>{goal.description}</div>
+      <div className='goal-counter'><img alt="star" src="/images/star.png" height="15" /><text>{goal.count}</text></div>
       <button className='btn btn-outline-secondary'>Complete!</button>
     </div>
 }
 
-function ExampleModal (props) {
-    let subtitle;
+function GoalModal (props) {
+
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
     function openModal() {
