@@ -5,16 +5,21 @@ import './home.css';
 
 Modal.setAppElement(document.getElementById('root'));
 
+export const starCountContext = React.createContext(null)
+
 export function Home() {
+    const [starCount, setStarCount] = React.useState(0)
     return <main>
+    <starCountContext.Provider value={{starCount: starCount, setStarCount: setStarCount}}>
     <div className="home-content-container">
-        <span className="star-counter"><img src="/images/star.png" alt="star" height="20"/> Number of stars: <b>35</b></span>
+        <span className="star-counter"><img src="/images/star.png" alt="star" height="20"/> Number of stars: <b>{starCount}</b></span>
         <h3>Welcome [username]!</h3>
         <Reward image="/images/ferrari.jpeg" title="Ferrari" caption="Don't you want a ferrari??"/>
         <button className="btn btn-secondary btn-lg">Create Reward!</button>
         <h3>Current Goals</h3>
         <CurrentGoals/>
     </div>
+    </starCountContext.Provider>
 </main>;
 }
 

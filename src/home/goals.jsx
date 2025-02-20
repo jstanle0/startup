@@ -1,9 +1,11 @@
 import React from "react";
 import Modal from 'react-modal';
-import {Goal} from './goal'
+import {Goal} from './goal';
+import { starCountContext } from "./home";
 
 export function CurrentGoals(){
     const [goals, setGoals] = React.useState([]);
+    const {starCount, setStarCount} = React.useContext(starCountContext);
 
     const addGoal = (newGoal) =>
         {
@@ -13,6 +15,7 @@ export function CurrentGoals(){
         })
     }
     const removeGoal = (goalId) => {
+      setStarCount(starCount + goals[goalId].count)
       setGoals(
         goals.filter((_, index) => index !== goalId)
       )
@@ -91,17 +94,17 @@ export function CurrentGoals(){
           <form>
               <div className="mb-3">
                   <label htmlFor="goalInput" className="form-label">Goal</label>
-                  <input type="goal" className="form-control" id="goalInput" value={goalName} onChange={(e) => setGoalName(e.target.value)} required/>
+                  <input type="goal" className="form-control" id="goalInput" value={goalName} onChange={(e) => setGoalName(e.target.value)} required autoComplete="off"/>
               </div>
               <div class="mb-3">
                   <label htmlFor="descriptionInput" className="form-label">Description</label>
-                  <input type="description" className="form-control" id="descriptionInput" value={goalDesc} onChange={(e) => setGoalDesc(e.target.value)} required/>
+                  <input type="description" className="form-control" id="descriptionInput" value={goalDesc} onChange={(e) => setGoalDesc(e.target.value)} required autoComplete="off"/>
               </div>
               <div class="mb-3">
                   <label htmlFor="starCountInput" className="form-label">Star Count</label>
-                  <input type="number" className="form-control" id="starCountInput" value={starValue} onChange={(e)=> setStarValue(e.target.value)} required/>
+                  <input type="number" className="form-control" id="starCountInput" value={starValue} onChange={(e)=> setStarValue(e.target.value)} required autoComplete="off"/>
               </div>
-              <button type="submit" className="btn btn-primary" onClick={()=>handleSubmit(goalName, goalDesc, starValue) }>Submit</button>
+              <button type="submit" className="btn btn-primary" onClick={()=>handleSubmit(goalName, goalDesc, parseInt(starValue)) }>Submit</button>
               </form>
         </Modal>
         </div>
