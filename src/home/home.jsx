@@ -12,7 +12,7 @@ export function Home() {
         <h3>Welcome [username]!</h3>
         <Reward image="/images/ferrari.jpeg" title="Ferrari" caption="Don't you want a ferrari??"/>
         <button className="btn btn-secondary btn-lg">Create Reward!</button>
-        <h3>Current Goals Placeholder</h3>
+        <h3>Current Goals</h3>
         <CurrentGoals/>
     </div>
 </main>;

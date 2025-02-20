@@ -25,7 +25,9 @@ export function CurrentGoals(){
             goalArray.push(<DisplayedGoal key={i} index={i} goal={goal}/>)
             
         }
-        
+        if (goalArray.length === 0) {
+          return <p>No goals right now. It's time to make some new ones!</p>
+        }
         return goalArray;
     }
 
@@ -66,7 +68,15 @@ export function CurrentGoals(){
           // references are now sync'd and can be accessed.
           subtitle.style.color = '#f00';
         }*/
-       const handleSubmit = (name, description, count) => addGoal(new Goal(name, description, count))
+       const handleSubmit = (name, description, count) => {
+        if (name && description && count) {
+          addGoal(new Goal(name, description, count))
+        } 
+       }
+
+       const [goalName, setGoalName] = React.useState("");
+       const [goalDesc, setGoalDesc] = React.useState("");
+       const [starValue, setStarValue] = React.useState("")
   
     return (
       <div>
@@ -76,22 +86,22 @@ export function CurrentGoals(){
           //onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Goal Modal"
         >
-          <form >
+          <form>
               <div className="mb-3">
-                  <label for="goalInput" className="form-label">Goal</label>
-                  <input type="goal" className="form-control" id="goalInput"/>
+                  <label htmlFor="goalInput" className="form-label">Goal</label>
+                  <input type="goal" className="form-control" id="goalInput" value={goalName} onChange={(e) => setGoalName(e.target.value)} required/>
               </div>
               <div class="mb-3">
-                  <label for="descriptionInput" className="form-label">Description</label>
-                  <input type="description" className="form-control" id="descriptionInput"/>
+                  <label htmlFor="descriptionInput" className="form-label">Description</label>
+                  <input type="description" className="form-control" id="descriptionInput" value={goalDesc} onChange={(e) => setGoalDesc(e.target.value)} required/>
               </div>
               <div class="mb-3">
-                  <label for="starCountInput" className="form-label">Star Count</label>
-                  <input type="number" className="form-control" id="starCountInput"/>
+                  <label htmlFor="starCountInput" className="form-label">Star Count</label>
+                  <input type="number" className="form-control" id="starCountInput" value={starValue} onChange={(e)=> setStarValue(e.target.value)} required/>
               </div>
-              <button type="submit" className="btn btn-primary" onClick={()=>handleSubmit("a", "b", 3)}>Submit</button>
+              <button type="submit" className="btn btn-primary" onClick={()=>handleSubmit(goalName, goalDesc, starValue) }>Submit</button>
               </form>
         </Modal>
         </div>
@@ -103,8 +113,6 @@ export function CurrentGoals(){
             {createGoalArray()}
     
         </div>
-        <button onClick={()=>(addGoal(goal1))}>add</button>
-        <button onClick={()=>(removeGoal(0))}>remove</button>
         <GoalModal />
     </div>
 }
