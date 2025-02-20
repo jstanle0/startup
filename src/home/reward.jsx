@@ -20,11 +20,11 @@ export function DisplayReward() {
     </div>*/}
     <div className="card mb-3 bg-primary-subtle" style={{maxWidth: '540px'}}>
         <div className="row g-0">
-            <div className="col-md-4 bg-primary">
+            <div className="col-md-4 bg-primary rounded-start" style={{display: 'flex', alignItems: 'center'}}>
             <img src="/images/ferrari.jpeg" className="img-fluid rounded-start" alt="ferrari"/>
             </div>
             <div className="col-md-8">
-                <div className="card-body bg-warning">
+                <div className="card-body bg-warning rounded-end">
                     <h5 className="card-title bg-warning">{title}</h5>
                     <p className="card-text bg-warning">{caption}</p>
                     <p className="card-text bg-warning">{starCount}/{starValue} <img alt="star" src="/images/star.png" height="15" className='bg-warning'></img></p>
