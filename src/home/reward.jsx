@@ -1,22 +1,25 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { starCountContext } from './home';
+import { Reward } from './reward';
 
 export function DisplayReward() {
     const {starCount, setStarCount} = React.useContext(starCountContext)
     const [rewardExists, setRewardExists] = React.useState(false)
+    const [currentReward, setCurrentReward] = React.useState()
 
-    function Reward({image, title, caption, starValue}) {
+
+    function ConstructReward({reward}) {
         function completeReward() {
-            setStarCount(starCount - starValue)
+            setStarCount(starCount - reward.value)
             setRewardExists(false)
         }
         function ProgressBar() {
-            if (starCount >= starValue) {
+            if (starCount >= reward.value) {
                 return <button type="button" className="btn btn-secondary btn-lg" style={{"maxWidth": "200px"}} onClick={()=>completeReward()} >Complete!</button>
             } else {
-                return <div className="progress" role="progressbar" aria-label="Basic example" aria-valuenow={starCount} aria-valuemin="0" aria-valuemax={starValue}>
-                <div className='progress-bar' style={{width: ((starCount/starValue) * 100).toFixed(2) + '%'}}></div>
+                return <div className="progress" role="progressbar" aria-label="Basic example" aria-valuenow={starCount} aria-valuemin="0" aria-valuemax={reward.value}>
+                <div className='progress-bar' style={{width: ((starCount/reward.value) * 100).toFixed(2) + '%'}}></div>
             </div>
                 
             }
@@ -36,13 +39,13 @@ export function DisplayReward() {
     <div className="card mb-3" style={{maxWidth: '540px', border: 'none'}}>
         <div className="row g-0">
             <div className="col-md-4 bg-primary rounded-start" style={{display: 'flex', alignItems: 'center'}}>
-            <img src="/images/ferrari.jpeg" className="img-fluid rounded-start" alt="ferrari"/>
+            <img src={reward.url} className="img-fluid rounded-start" alt={reward.url}/>
             </div>
             <div className="col-md-8">
                 <div className="card-body bg-warning rounded-end">
-                    <h5 className="card-title bg-warning">{title}</h5>
-                    <p className="card-text bg-warning">{caption}</p>
-                    <p className="card-text bg-warning">{starCount}/{starValue} <img alt="star" src="/images/star.png" height="15" className='bg-warning'></img></p>
+                    <h5 className="card-title bg-warning">{reward.name}</h5>
+                    <p className="card-text bg-warning">{reward.desc}</p>
+                    <p className="card-text bg-warning">{starCount}/{reward.value} <img alt="star" src="/images/star.png" height="15" className='bg-warning'></img></p>
                     <ProgressBar />
                 </div>
             </div>
@@ -78,13 +81,15 @@ export function DisplayReward() {
                   // references are now sync'd and can be accessed.
                   subtitle.style.color = '#f00';
                 }*/
-            const handleSubmit = () => {
+            const handleSubmit = (name, desc, url, value) => {
             setRewardExists(true)
+            setCurrentReward(() => {return new Reward(name, desc, url, value)})
             }
     
-            const [goalName, setGoalName] = React.useState("");
-            const [goalDesc, setGoalDesc] = React.useState("");
-            const [starValue, setStarValue] = React.useState("")
+            const [rewardName, setRewardName] = React.useState("");
+            const [rewardDesc, setRewardDesc] = React.useState("");
+            const [imageURL, setImageURL] = React.useState("");
+            const [starValue, setStarValue] = React.useState("");
         
         return (
             <div>
@@ -95,22 +100,26 @@ export function DisplayReward() {
                 //onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 style={customStyles}
-                contentLabel="Goal Modal"
+                contentLabel="Reward Modal"
             >
                 <form>
                     <div className="mb-3">
-                        <label htmlFor="goalInput" className="form-label">Goal</label>
-                        <input type="goal" className="form-control" id="goalInput" value={goalName} onChange={(e) => setGoalName(e.target.value)} required autoComplete="off"/>
+                        <label htmlFor="goalInput" className="form-label">Reward</label>
+                        <input type="goal" className="form-control" id="goalInput" value={rewardName} onChange={(e) => setRewardName(e.target.value)} required autoComplete="off"/>
                     </div>
                     <div class="mb-3">
                         <label htmlFor="descriptionInput" className="form-label">Description</label>
-                        <input type="description" className="form-control" id="descriptionInput" value={goalDesc} onChange={(e) => setGoalDesc(e.target.value)} required autoComplete="off"/>
+                        <input type="description" className="form-control" id="descriptionInput" value={rewardDesc} onChange={(e) => setRewardDesc(e.target.value)} required autoComplete="off"/>
+                    </div>
+                    <div class="mb-3">
+                        <label htmlFor="descriptionInput" className="form-label">Image URL</label>
+                        <input type="imageURL" className="form-control" id="urlInput" value={imageURL} onChange={(e) => setImageURL(e.target.value)} required autoComplete="off"/>
                     </div>
                     <div class="mb-3">
                         <label htmlFor="starCountInput" className="form-label">Star Count</label>
                         <input type="number" className="form-control" id="starCountInput" value={starValue} onChange={(e)=> setStarValue(e.target.value)} required autoComplete="off"/>
                     </div>
-                    <button type="submit" className="btn btn-primary" onClick={()=>handleSubmit() }>Submit</button>
+                    <button type="submit" className="btn btn-primary" onClick={()=>handleSubmit(rewardName, rewardDesc, imageURL, parseInt(starValue)) }>Submit</button>
                     </form>
             </Modal>
             </div>
@@ -118,10 +127,12 @@ export function DisplayReward() {
         
     }
     if (rewardExists) {
-        return  <Reward image="/images/ferrari.jpeg" title="ferrari" caption="i want ferrari pls" starValue={20}/>
+        return  <ConstructReward reward={currentReward}/>
 
     } else {
     return (
+        <>
         <RewardModal/>
+        </>
     )
   }}

@@ -20,7 +20,6 @@ export function CurrentGoals(){
         goals.filter((_, index) => index !== goalId)
       )
     }
-    const goal1 = new Goal("Mow Lawn", "This week", 5)
 
     function createGoalArray() {
         const goalArray = []
