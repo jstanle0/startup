@@ -15,7 +15,7 @@ export function Login() {
     async function processLogin() {
         setUsername(usernameInput);
         setAuthenticated(true);
-        localStorage.setItem('username', username)
+        localStorage.setItem('username', usernameInput)
     }
     return <main className="form-signin w-100 m-auto login-main">
     <div className="content-container">
