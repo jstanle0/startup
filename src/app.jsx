@@ -8,14 +8,26 @@ import { Community } from './community/community';
 import { Home } from './home/home';
 import { Login } from './login/login';
 
+export const usernameContext = React.createContext(null);
+export const authenticatedContext = React.createContext(null);
+
 export default function App() {
-  return <BrowserRouter>
-    <div className='app' id='app'>
-        <Header />
-        <Main />
-        <Footer />
-    </div>
-  </BrowserRouter>;
+
+    const [username, setUsername] = React.useState(localStorage.getItem('username') || '');
+    const authstate = username ? true : false
+    const [authenticated, setAuthenticated] = React.useState(authstate)
+
+    return <BrowserRouter>
+        <usernameContext.Provider value={{username: username, setUsername: setUsername}}>
+            <authenticatedContext.Provider value={{authenticated: authenticated, setAuthenticated: setAuthenticated}}>
+                <div className='app' id='app'>
+                    <Header />
+                    <Main />
+                    <Footer />
+                </div>
+            </authenticatedContext.Provider>    
+        </usernameContext.Provider>
+    </BrowserRouter>;
 }
 
 function Header() {

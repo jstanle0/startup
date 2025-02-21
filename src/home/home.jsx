@@ -1,8 +1,9 @@
 import React from 'react';
 import Modal from 'react-modal'
 import { CurrentGoals } from './goals';
-import { DisplayReward } from './reward';
+import { DisplayReward } from './reward.jsx';
 import './home.css';
+import { usernameContext } from '../app';
 
 Modal.setAppElement(document.getElementById('root'));
 
@@ -10,11 +11,12 @@ export const starCountContext = React.createContext(null)
 
 export function Home() {
     const [starCount, setStarCount] = React.useState(0)
+    const {username, _} = React.useContext(usernameContext)
     return <main>
     <starCountContext.Provider value={{starCount: starCount, setStarCount: setStarCount}}>
     <div className="home-content-container">
         <span className="star-counter"><img src="/images/star.png" alt="star" height="20"/> Number of stars: <b>{starCount}</b></span>
-        <h3>Welcome [username]!</h3>
+        <h3>Welcome {username}!</h3>
         <DisplayReward />
         <h3>Current Goals</h3>
         <CurrentGoals/>
