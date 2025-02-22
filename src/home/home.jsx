@@ -11,7 +11,7 @@ Modal.setAppElement(document.getElementById('root'));
 export const starCountContext = React.createContext(null)
 
 export function Home() {
-    const [starCount, setStarCount] = React.useState(0)
+    const [starCount, setStarCount] = React.useState(JSON.parse(localStorage.getItem('starCount')) || 0)
     const {username, _} = React.useContext(usernameContext)
     const {authenticated, __} = React.useContext(authenticatedContext)
 

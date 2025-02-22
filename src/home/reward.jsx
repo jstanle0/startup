@@ -5,14 +5,20 @@ import { Reward } from './reward';
 
 export function DisplayReward() {
     const {starCount, setStarCount} = React.useContext(starCountContext)
-    const [rewardExists, setRewardExists] = React.useState(false)
-    const [currentReward, setCurrentReward] = React.useState()
+    const [currentReward, setCurrentReward] = React.useState(JSON.parse(localStorage.getItem('reward')) || '')
+    const [rewardExists, setRewardExists] = React.useState(currentReward ? true : false)
+    async function save(name, item) {
+        localStorage.setItem(name, JSON.stringify(item))
+    }
 
 
     function ConstructReward({reward}) {
         function completeReward() {
-            setStarCount(starCount - reward.value)
+            let newCount = starCount - reward.value
+            setStarCount(newCount)
+            save('starCount', newCount)
             setRewardExists(false)
+            save('reward', '')
         }
         function ProgressBar() {
             if (starCount >= reward.value) {
@@ -83,7 +89,9 @@ export function DisplayReward() {
                 }*/
             const handleSubmit = (name, desc, url, value) => {
             setRewardExists(true)
-            setCurrentReward(() => {return new Reward(name, desc, url, value)})
+            let tempReward = new Reward(name, desc, url, value)
+            setCurrentReward(tempReward)
+            save('reward', tempReward)
             }
     
             const [rewardName, setRewardName] = React.useState("");

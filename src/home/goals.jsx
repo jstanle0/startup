@@ -4,21 +4,27 @@ import {Goal} from './goal';
 import { starCountContext } from "./home";
 
 export function CurrentGoals(){
-    const [goals, setGoals] = React.useState([]);
+    const [goals, setGoals] = React.useState(JSON.parse(localStorage.getItem('goals')) || []);
     const {starCount, setStarCount} = React.useContext(starCountContext);
+    async function save(name, item) {
+      localStorage.setItem(name, JSON.stringify(item))
+    }
 
     const addGoal = (newGoal) =>
         {
         setGoals(()=> {
           let newGoals = [...goals, newGoal]
+          save('goals', newGoals)
           return newGoals
         })
     }
     const removeGoal = (goalId) => {
-      setStarCount(starCount + goals[goalId].count)
-      setGoals(
-        goals.filter((_, index) => index !== goalId)
-      )
+      let newCount = starCount + goals[goalId].count
+      setStarCount(newCount)
+      save('starCount', newCount)
+      let newGoals = goals.filter((_, index) => index !== goalId)
+      setGoals(newGoals)
+      save('goals', newGoals)
     }
 
     function createGoalArray() {
