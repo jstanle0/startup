@@ -17,6 +17,9 @@ export default function App() {
     const [username, setUsername] = React.useState(localStorage.getItem('username') || '');
     const authstate = username ? true : false
     const [authenticated, setAuthenticated] = React.useState(authstate)
+    const [imageSrc, setImageSrc] = React.useState('loading...')
+
+    React.useState(()=>setImageSrc('/images/logo.png'))
 
     return <BrowserRouter>
         <usernameContext.Provider value={{username: username, setUsername: setUsername}}>
@@ -41,7 +44,7 @@ function Header() {
             <NavLink to="/home" className="logo">
                 <img src="/images/logo.png" alt="logo" height="75"/>
             </NavLink>)}
-            {!authenticated && (<div className='logo'><img src="/images/logo.png" alt="logo" height="75"/></div>)}
+            {!authenticated && (<div className='logo'><img src={imageSrc} alt="logo" height="75"/></div>)}
             <h1>Shoot for the Stars!</h1>
             <nav>
                 {!authenticated && (<NavLink to="" className="nav-element">Login</NavLink>) }
