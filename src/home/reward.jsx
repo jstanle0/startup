@@ -102,7 +102,7 @@ export function DisplayReward() {
                 style={customStyles}
                 contentLabel="Reward Modal"
             >
-                <form>
+                <form onSubmit={()=>handleSubmit(rewardName, rewardDesc, imageURL, parseInt(starValue))}>
                     <div className="mb-3">
                         <label htmlFor="goalInput" className="form-label">Reward</label>
                         <input type="goal" className="form-control" id="goalInput" value={rewardName} onChange={(e) => setRewardName(e.target.value)} required autoComplete="off"/>
@@ -119,7 +119,7 @@ export function DisplayReward() {
                         <label htmlFor="starCountInput" className="form-label">Star Count</label>
                         <input type="number" className="form-control" id="starCountInput" value={starValue} onChange={(e)=> setStarValue(e.target.value)} required autoComplete="off"/>
                     </div>
-                    <button type="submit" className="btn btn-primary" onClick={()=>handleSubmit(rewardName, rewardDesc, imageURL, parseInt(starValue)) }>Submit</button>
+                    <button type="submit" className="btn btn-primary">Submit</button>
                     </form>
             </Modal>
             </div>

@@ -4,6 +4,7 @@ import { CurrentGoals } from './goals';
 import { DisplayReward } from './reward.jsx';
 import './home.css';
 import { usernameContext } from '../app';
+import { authenticatedContext } from '../app';
 
 Modal.setAppElement(document.getElementById('root'));
 
@@ -12,6 +13,12 @@ export const starCountContext = React.createContext(null)
 export function Home() {
     const [starCount, setStarCount] = React.useState(0)
     const {username, _} = React.useContext(usernameContext)
+    const {authenticated, __} = React.useContext(authenticatedContext)
+
+    if (!authenticated) {
+        return <main>please log in to see this content</main>
+    }
+
     return <main>
     <starCountContext.Provider value={{starCount: starCount, setStarCount: setStarCount}}>
     <div className="home-content-container">

@@ -37,7 +37,11 @@ async function logout() {
 function Header() {
     return <header>
         <div className="aligned-header">
-            <NavLink to="/home" className="logo"><img src="/images/logo.png" alt="logo" height="75"/></NavLink>
+            {authenticated && (
+            <NavLink to="/home" className="logo">
+                <img src="/images/logo.png" alt="logo" height="75"/>
+            </NavLink>)}
+            {!authenticated && (<div className='logo'><img src="/images/logo.png" alt="logo" height="75"/></div>)}
             <h1>Shoot for the Stars!</h1>
             <nav>
                 {!authenticated && (<NavLink to="" className="nav-element">Login</NavLink>) }
