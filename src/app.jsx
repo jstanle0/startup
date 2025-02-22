@@ -43,7 +43,7 @@ function Header() {
                 {!authenticated && (<NavLink to="" className="nav-element">Login</NavLink>) }
                 <NavLink to="about" className="nav-element">About</NavLink> 
                 <NavLink to="community" className="nav-element">Community</NavLink>
-                {authenticated && (<button onClick={()=>logout()}>Logout</button>)} 
+                {authenticated && (<NavLink to="" className="nav-element" onClick={()=>logout()}>Logout</NavLink>)} 
             </nav>
         </div> 
     </header>;
