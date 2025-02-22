@@ -7,6 +7,7 @@ import { About } from './about/about';
 import { Community } from './community/community';
 import { Home } from './home/home';
 import { Login } from './login/login';
+import { Button } from 'bootstrap';
 
 export const usernameContext = React.createContext(null);
 export const authenticatedContext = React.createContext(null);
@@ -28,6 +29,9 @@ export default function App() {
             </authenticatedContext.Provider>    
         </usernameContext.Provider>
     </BrowserRouter>;
+async function logout() {
+    setAuthenticated(false)
+    localStorage.removeItem('username')
 }
 
 function Header() {
@@ -36,9 +40,10 @@ function Header() {
             <NavLink to="/home" className="logo"><img src="/images/logo.png" alt="logo" height="75"/></NavLink>
             <h1>Shoot for the Stars!</h1>
             <nav>
-                <NavLink to="" className="nav-element">Login</NavLink> 
+                {!authenticated && (<NavLink to="" className="nav-element">Login</NavLink>) }
                 <NavLink to="about" className="nav-element">About</NavLink> 
-                <NavLink to="community" className="nav-element">Community</NavLink> 
+                <NavLink to="community" className="nav-element">Community</NavLink>
+                {authenticated && (<button onClick={()=>logout()}>Logout</button>)} 
             </nav>
         </div> 
     </header>;
@@ -65,3 +70,5 @@ function NotFound() {
         <p>404: Return to sender. Address unknown.</p>
         </main>;
   }
+
+}
