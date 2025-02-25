@@ -1,10 +1,13 @@
 import React from 'react';
+import Modal from 'react-modal';
 import './community.css';
 
 import { Notifier } from './postNotifier';
 
 export function Community() {
     const [posts, setPosts] = React.useState([]);
+    const [recentEvents, setRecentEvents] = React.useState(JSON.parse(localStorage.getItem('recentEvents'))||'')
+    
 
     React.useEffect(()=> {
       Notifier.addHandler(notificationHandler);
@@ -39,8 +42,38 @@ export function Community() {
       
       return postArray;
     }
+    function AddPostModal() {
+        const [isOpen, setIsOpen] = React.useState(false)
+        const openModal = () => setIsOpen(true)
+        const closeModal = () => setIsOpen(false)
+        const customStyles = {
+            content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: '#FAFAFF',
+            },
+        };
+
+        return (<div>
+        <button type="button" className="btn btn-primary btn-lg" style={{"maxWidth": "200px"}} onClick={openModal}>Create a post!</button>
+
+        <Modal
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel='create post modal'
+        >
+
+        </Modal>
+        </div>)
+    }
     return <main className="community-main">
     <h3>Welcome to the community page!</h3>
+    <AddPostModal />
     <p>Finding posts near you...</p>
         <div className="community-content-container">
           {displayPosts()/*<FormatPost name="Suzy reached their reward!" caption="I earned 500 stars and got the ferrari!" image="/images/ferrari.jpeg"/>
