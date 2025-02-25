@@ -3,13 +3,15 @@ import Modal from 'react-modal';
 import { starCountContext } from './home';
 import { Reward } from './reward';
 
-export function DisplayReward() {
+export function DisplayReward(props) {
     const {starCount, setStarCount} = React.useContext(starCountContext)
     const [currentReward, setCurrentReward] = React.useState(JSON.parse(localStorage.getItem('reward')) || '')
     const [rewardExists, setRewardExists] = React.useState(currentReward ? true : false)
+
     async function save(name, item) {
         localStorage.setItem(name, JSON.stringify(item))
     }
+
 
 
     function ConstructReward({reward}) {
@@ -17,6 +19,7 @@ export function DisplayReward() {
             let newCount = starCount - reward.value
             setStarCount(newCount)
             save('starCount', newCount)
+            props.handleRecentEvent(['reward', reward])
             setRewardExists(false)
             save('reward', '')
         }

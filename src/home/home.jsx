@@ -19,14 +19,30 @@ export function Home() {
         return <main>please log in to see this content</main>
     }
 
+    const [recentEvents, setRecentEvents] = React.useState(JSON.parse(localStorage.getItem('recentEvents'))||'')
+    async function save(name, item) {
+        localStorage.setItem(name, JSON.stringify(item))
+      }
+  
+    function handleRecentEvent(event) {
+        setRecentEvents(()=>{
+          let newRecentEvents = [event, ...recentEvents]
+          if (newRecentEvents.length > 5) {
+              newRecentEvents = newRecentEvents.slice(0, 5);
+          }
+          save('recentEvents', newRecentEvents)
+          return newRecentEvents
+        })
+    }
+
     return <main>
     <starCountContext.Provider value={{starCount: starCount, setStarCount: setStarCount}}>
     <div className="home-content-container">
         <span className="star-counter"><img src="/images/star.png" alt="star" height="20"/> Number of stars: <b>{starCount}</b></span>
         <h3>Welcome {username}!</h3>
-        <DisplayReward />
+        <DisplayReward handleRecentEvent={handleRecentEvent}/>
         <h3>Current Goals</h3>
-        <CurrentGoals/>
+        <CurrentGoals handleRecentEvent={handleRecentEvent}/>
     </div>
     </starCountContext.Provider>
 </main>;

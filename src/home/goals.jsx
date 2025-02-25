@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import {Goal} from './goal';
 import { starCountContext } from "./home";
 
-export function CurrentGoals(){
+export function CurrentGoals(props){
     const [goals, setGoals] = React.useState(JSON.parse(localStorage.getItem('goals')) || []);
     const {starCount, setStarCount} = React.useContext(starCountContext);
     async function save(name, item) {
@@ -22,6 +22,7 @@ export function CurrentGoals(){
       let newCount = starCount + goals[goalId].count
       setStarCount(newCount)
       save('starCount', newCount)
+      props.handleRecentEvent(['goal', goals[goalId]])
       let newGoals = goals.filter((_, index) => index !== goalId)
       setGoals(newGoals)
       save('goals', newGoals)
