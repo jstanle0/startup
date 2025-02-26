@@ -1,6 +1,7 @@
 class Post {
-    constructor(username, type, message, imageSrc) {
+    constructor(username, name, type, message, imageSrc) {
         this.username = username;
+        this.name = name;
         this.type = type;
         this.message = message;
         this.imageSrc = imageSrc;
@@ -16,14 +17,15 @@ class PostNotifer {
         this.isPaused = false;
         setInterval(()=> {
             const username = randomElement(['Suzy', 'Bill', 'Todd', 'KillerMan47', 'Donkey Kong'])
+            const name = randomElement(['mow lawn', 'ferrari', 'win lottery', 'camera'])
             const type = randomElement(['reward', 'goal'])
             const message = randomElement(['I finally finished it!', 'I love this webiste!!', 'This was really hard', 'I hate fortnite'])
             const imageSrc = randomElement(['/images/ferrari.jpeg', '/images/space.jpeg', '/images/lawnmower.jpeg', '/images/camera.jpeg'])
-            this.brodcastPost(username, type, message, imageSrc)
+            this.brodcastPost(username, name, type, message, imageSrc)
         }, 5000)
     }
-    brodcastPost(username, type, message, imageSrc) {
-        const post = new Post(username, type, message, imageSrc)
+    brodcastPost(username, name, type, message, imageSrc) {
+        const post = new Post(username, name, type, message, imageSrc)
         this.recievePost(post)
     }
     recievePost(post) {

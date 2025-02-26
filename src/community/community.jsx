@@ -3,10 +3,12 @@ import Modal from 'react-modal';
 import './community.css';
 
 import { Notifier } from './postNotifier';
+import { usernameContext } from '../app';
 
 export function Community() {
     const [posts, setPosts] = React.useState([]);
     const [recentEvents, setRecentEvents] = React.useState(JSON.parse(localStorage.getItem('recentEvents'))||'')
+    const {username, setUsername} = React.useContext(usernameContext)
     
 
     React.useEffect(()=> {
@@ -29,9 +31,9 @@ export function Community() {
       for (const [i, post] of posts.entries()) {
           let title = 'unknown';
           if (post.type == 'reward') {
-            title = post.username + " has reached their reward!"
+            title = post.username + " has reached their reward: " + post.name
           } else {
-            title = post.username + " has finished their goal!"
+            title = post.username + " has finished their goal: " + post.name
           }
           postArray.push(
           <div key={i}>
@@ -72,8 +74,18 @@ export function Community() {
           }
           return formattedEvents;
         };*/
+        const [selectedEvent, setSelectedEvent] = React.useState()
+        const [comments, setComments] = React.useState('')
+        const [imageURL, setImageURL] = React.useState('')
 
-        if (recentEvents) { 
+        function handleSubmit(e, currentEventIndex, comment, src) {
+          e.preventDefault();
+          closeModal()
+          let currentEvent = recentEvents[currentEventIndex]
+          Notifier.brodcastPost(username, currentEvent[1].name, currentEvent[0], comment, src)
+        }
+
+        if (recentEvents && username) { 
           return (<div>
           <button type="button" className="btn btn-primary btn-lg" style={{"maxWidth": "200px"}} onClick={openModal}>Create a post!</button>
 
@@ -83,13 +95,22 @@ export function Community() {
           style={customStyles}
           contentLabel='create post modal'
           >
-            <form>
-              <select className="form-select" aria-label="Select post topic" style={{marginBottom: '.5em'}}>
+            <form onSubmit={(e)=>handleSubmit(e, selectedEvent, comments, imageURL)}>
+              <div className="mb-3">  
+              <select className="form-select" aria-label="Select post topic" onChange={(e)=>setSelectedEvent(e.target.value)}>
                 <option defaultValue="">Select a recent event to post about</option>
-                {recentEvents.map((recentEvent, index) => <option key={index} vale={recentEvent}>{recentEvent[0]}: {recentEvent[1].name}</option>)}
+                {recentEvents.map((recentEvent, index) => <option key={index} value={index}>{recentEvent[0]}: {recentEvent[1].name}</option>)}
               </select>
-              <textarea className="form-control" placeholder="Leave a comment here" id="modalTextarea" style={{marginBottom: '.5em'}}></textarea>
-              <button type="button" className="btn btn-warning" style={{"maxWidth": "200px"}}>Post it!</button>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="modalTextarea" className="form-label">Comments</label>
+                <textarea className="form-control" placeholder="Leave a comment here" id="modalTextarea" required autoComplete="off" value={comments} onChange={(e)=>setComments(e.target.value)}></textarea>
+              </div>
+              <div className="mb-3">
+                        <label htmlFor="descriptionInput" className="form-label">Image URL</label>
+                        <input type="imageURL" className="form-control" id="urlInput" required autoComplete="off" value={imageURL} onChange={(e)=>setImageURL(e.target.value)}/>
+                    </div>
+              <button type="submit" className="btn btn-warning" style={{"maxWidth": "200px"}}>Post it!</button>
 
             </form>
           </Modal>

@@ -118,15 +118,15 @@ export function DisplayReward(props) {
                         <label htmlFor="goalInput" className="form-label">Reward</label>
                         <input type="goal" className="form-control" id="goalInput" value={rewardName} onChange={(e) => setRewardName(e.target.value)} required autoComplete="off"/>
                     </div>
-                    <div class="mb-3">
+                    <div className="mb-3">
                         <label htmlFor="descriptionInput" className="form-label">Description</label>
                         <input type="description" className="form-control" id="descriptionInput" value={rewardDesc} onChange={(e) => setRewardDesc(e.target.value)} required autoComplete="off"/>
                     </div>
-                    <div class="mb-3">
+                    <div className="mb-3">
                         <label htmlFor="descriptionInput" className="form-label">Image URL</label>
                         <input type="imageURL" className="form-control" id="urlInput" value={imageURL} onChange={(e) => setImageURL(e.target.value)} required autoComplete="off"/>
                     </div>
-                    <div class="mb-3">
+                    <div className="mb-3">
                         <label htmlFor="starCountInput" className="form-label">Star Count</label>
                         <input type="number" className="form-control" id="starCountInput" value={starValue} onChange={(e)=> setStarValue(e.target.value)} required autoComplete="off"/>
                     </div>
