@@ -14,6 +14,9 @@ export function Home() {
     const [starCount, setStarCount] = React.useState(JSON.parse(localStorage.getItem('starCount')) || 0)
     const {username, _} = React.useContext(usernameContext)
     const {authenticated, __} = React.useContext(authenticatedContext)
+    const [starSrc, setStarSrc] = React.useState(null)
+
+    React.useEffect(()=> setStarSrc('/images/star.png'))
 
     if (!authenticated) {
         return <main>please log in to see this content</main>
@@ -38,7 +41,7 @@ export function Home() {
     return <main>
     <starCountContext.Provider value={{starCount: starCount, setStarCount: setStarCount}}>
     <div className="home-content-container">
-        <span className="star-counter"><img src="/images/star.png" alt="star" height="20"/> Number of stars: <b>{starCount}</b></span>
+        <span className="star-counter"><img src={starSrc} alt="star" height="20"/> Number of stars: <b>{starCount}</b></span>
         <h3>Welcome {username}!</h3>
         <DisplayReward handleRecentEvent={handleRecentEvent}/>
         <h3>Current Goals</h3>

@@ -114,8 +114,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - Login, reward and goal creation and completion, and posting and recieving community posts have all been mocked out.
+- [x] **Hooks** - React states and effects have been used to implement all functionality - login, goal, reward, community post, and image src
 
 ## 🚀 Service deliverable
 

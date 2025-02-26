@@ -97,7 +97,7 @@ export function Community() {
           >
             <form onSubmit={(e)=>handleSubmit(e, selectedEvent, comments, imageURL)}>
               <div className="mb-3">  
-              <select className="form-select" aria-label="Select post topic" onChange={(e)=>setSelectedEvent(e.target.value)}>
+              <select className="form-select" aria-label="Select post topic" onChange={(e)=>setSelectedEvent(e.target.value)} required>
                 <option defaultValue="">Select a recent event to post about</option>
                 {recentEvents.map((recentEvent, index) => <option key={index} value={index}>{recentEvent[0]}: {recentEvent[1].name}</option>)}
               </select>
@@ -110,7 +110,7 @@ export function Community() {
                         <label htmlFor="descriptionInput" className="form-label">Image URL</label>
                         <input type="imageURL" className="form-control" id="urlInput" required autoComplete="off" value={imageURL} onChange={(e)=>setImageURL(e.target.value)}/>
                     </div>
-              <button type="submit" className="btn btn-warning" style={{"maxWidth": "200px"}}>Post it!</button>
+              <button type="submit" className="btn btn-warning" style={{"maxWidth": "200px"}} disabled={!selectedEvent||!comments||!imageURL}>Post it!</button>
 
             </form>
           </Modal>

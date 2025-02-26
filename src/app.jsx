@@ -7,7 +7,6 @@ import { About } from './about/about';
 import { Community } from './community/community';
 import { Home } from './home/home';
 import { Login } from './login/login';
-import { Button } from 'bootstrap';
 
 export const usernameContext = React.createContext(null);
 export const authenticatedContext = React.createContext(null);
