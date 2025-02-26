@@ -17,8 +17,8 @@ export function Community() {
     function notificationHandler(post) {
           setPosts((prevPosts)=>{
             let newPosts = [post, ...prevPosts]
-            if (newPosts.length > 10) {
-              newPosts = newPosts.slice(1, 10)
+            if (newPosts.length > 9) {
+              newPosts = newPosts.slice(0, 9)
             } 
              return newPosts
           })
@@ -44,8 +44,14 @@ export function Community() {
     }
     function AddPostModal() {
         const [isOpen, setIsOpen] = React.useState(false)
-        const openModal = () => setIsOpen(true)
-        const closeModal = () => setIsOpen(false)
+        const openModal = () => {
+          setIsOpen(true)
+          Notifier.pause()
+        }
+        const closeModal = () => {
+          setIsOpen(false)
+          Notifier.resume()
+        }
         const customStyles = {
             content: {
             top: '50%',
@@ -58,18 +64,34 @@ export function Community() {
             },
         };
 
-        return (<div>
-        <button type="button" className="btn btn-primary btn-lg" style={{"maxWidth": "200px"}} onClick={openModal}>Create a post!</button>
+       /* function displayRecentEvents() {
+          let formattedEvents = [];
+          for (const [i, recentEvent] of recentEvents.entries()) {
+            console.log(recentEvent)
+            formattedEvents.push(<option key={i}>{recentEvent}</option>);//recentEvent[1]}: {recentEvent[2].name}</option>);
+          }
+          return formattedEvents;
+        };*/
 
-        <Modal
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel='create post modal'
-        >
+        if (recentEvents) { 
+          return (<div>
+          <button type="button" className="btn btn-primary btn-lg" style={{"maxWidth": "200px"}} onClick={openModal}>Create a post!</button>
 
-        </Modal>
-        </div>)
+          <Modal
+          isOpen={isOpen}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel='create post modal'
+          >
+            <select class="form-select" aria-label="Select post topic">
+              <option>Select a recent event to post about</option>
+              {recentEvents.map((recentEvent, index) => <option key={index}>{index}</option>)}
+            </select>
+          </Modal>
+        </div>)} else {
+          return <p>Acheive some goals or complete a reward to make your own post!</p>
+        }
+        
     }
     return <main className="community-main">
     <h3>Welcome to the community page!</h3>
