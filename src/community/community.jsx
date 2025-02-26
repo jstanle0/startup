@@ -83,10 +83,15 @@ export function Community() {
           style={customStyles}
           contentLabel='create post modal'
           >
-            <select class="form-select" aria-label="Select post topic">
-              <option>Select a recent event to post about</option>
-              {recentEvents.map((recentEvent, index) => <option key={index}>{index}</option>)}
-            </select>
+            <form>
+              <select className="form-select" aria-label="Select post topic" style={{marginBottom: '.5em'}}>
+                <option defaultValue="">Select a recent event to post about</option>
+                {recentEvents.map((recentEvent, index) => <option key={index} vale={recentEvent}>{recentEvent[0]}: {recentEvent[1].name}</option>)}
+              </select>
+              <textarea className="form-control" placeholder="Leave a comment here" id="modalTextarea" style={{marginBottom: '.5em'}}></textarea>
+              <button type="button" className="btn btn-warning" style={{"maxWidth": "200px"}}>Post it!</button>
+
+            </form>
           </Modal>
         </div>)} else {
           return <p>Acheive some goals or complete a reward to make your own post!</p>
