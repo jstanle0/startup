@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "service.js",
   "scripts": {
-    "dev": "node"
+    "start": "node service.js"
   },
   "keywords": [],
   "author": "",
