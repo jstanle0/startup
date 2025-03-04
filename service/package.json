@@ -1,0 +1,16 @@
+{
+  "name": "service",
+  "version": "1.0.0",
+  "main": "service.js",
+  "scripts": {
+    "dev": "node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "express": "^4.21.2"
+  }
+}
