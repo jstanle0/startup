@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
+
 app.use(express.json());
 
 app.use(express.static('public'))
@@ -13,4 +15,4 @@ app.use((_req, res) => {
     res.sendFile('index.html', { root: './' });
 });
 
-app.listen(3000, () => { console.log("listening on port 3000") });
+app.listen(port, () => { console.log(`listening on port ${port}`) });
