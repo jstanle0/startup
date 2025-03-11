@@ -7,7 +7,12 @@ app.use(express.json());
 
 app.use(express.static('public'))
 
-app.get('post')
+const apiRouter = express.Router()
+app.use('/api', apiRouter)
+
+apiRouter.post('/account/create', async (req, res) => {
+    res.status(200).send({name: "hi"})
+})
 
 app.use(function (err, req, res, next) {
     res.status(500).send({ type: err.name, message: err.message });
