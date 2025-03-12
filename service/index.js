@@ -10,8 +10,11 @@ app.use(express.static('public'))
 const apiRouter = express.Router()
 app.use('/api', apiRouter)
 
+const users = []
+
 apiRouter.post('/account/create', async (req, res) => {
-    res.status(200).send({name: "hi"})
+    users.push({username: req.body.username, password: req.body.password})
+    res.status(200).send({name: req.body.username})
 })
 
 app.use(function (err, req, res, next) {

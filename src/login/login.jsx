@@ -22,10 +22,19 @@ export function Login() {
         navigate('/home')
     }
     async function createAccount() {
+        const response = await fetch('/api/account/create', {
+            method: 'post',
+            body: JSON.stringify({username: usernameInput, password: passwordInput}),
+            headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                  },
+        })
+        if (response.ok) {
         setUsername(usernameInput);
         setAuthenticated(true);
         localStorage.setItem('username', usernameInput)
         navigate('/home')
+        }
     }
     return <main className="form-signin w-100 m-auto login-main">
     <div className="content-container">
