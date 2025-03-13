@@ -30,18 +30,29 @@ export function CurrentGoals(props){
           });
         setGoals(()=> {
           let newGoals = [...goals, newGoal]
-          save('goals', newGoals)
+          //save('goals', newGoals)
           return newGoals
         })
+    }
+    async function changeGoals(goalId) {
+      const response = await fetch('/api/home/goal', {
+        method: 'delete',
+        body: JSON.stringify({index: goalId}),
+        headers: {'Content-type': 'application/json; charset=UTF-8',},
+      })
+      if (response.ok) {
+        const body = await response.json()
+        setGoals(body.goals || [])
+      }
     }
     const removeGoal = (goalId) => {
       let newCount = starCount + goals[goalId].count
       setStarCount(newCount)
       save('starCount', newCount)
       props.handleRecentEvent(['goal', goals[goalId]])
-      let newGoals = goals.filter((_, index) => index !== goalId)
-      setGoals(newGoals)
-      save('goals', newGoals)
+      changeGoals(goalId);
+      
+      //save('goals', newGoals)
     }
 
     function createGoalArray() {

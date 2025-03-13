@@ -35,6 +35,11 @@ apiRouter.get('/home/goals', verify, async (req, res)=>{
     const user = res.locals.user;
     res.status(200).send({goals: user.goals})
 })
+apiRouter.delete('/home/goal', verify, async (req, res) => {
+    const user = res.locals.user;
+    user.goals.splice(req.body.index, 1)
+    res.status(200).send({goals: user.goals})
+})
 //Community
 apiRouter.post('/community/post', verify, async (req, res) =>{
     res.status(200).send({msg: 'websocket placeholder'})
