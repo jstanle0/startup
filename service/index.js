@@ -29,7 +29,7 @@ apiRouter.post('/account/create', async (req, res) => {
         res.status(200).send({user: user.username})
     }
 })
-//
+
 apiRouter.post('/account/login', async (req, res) => {
     const user = await findUser('username', req.body.username)
     if (user && await bcrypt.compare(req.body.password, user.password)) {
@@ -39,6 +39,15 @@ apiRouter.post('/account/login', async (req, res) => {
         return
     }
     res.status(409).send( { msg: "Invalid credentials" } ) 
+})
+
+apiRouter.delete('/account/logout', async (req, res) => {
+    const user = await findUser('token', req.cookies['token'])
+    if (user) {
+        delete user.token
+    }
+    res.clearCookie('token')
+    res.status(200).send({msg:'Log out successful'})
 })
 
 app.use(function (err, req, res, next) {

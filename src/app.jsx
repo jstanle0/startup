@@ -2,7 +2,7 @@ import React from 'react';
 import './custom_bootstrap.css';
 import './app.css';
 
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
 import { About } from './about/about';
 import { Community } from './community/community';
 import { Home } from './home/home';
@@ -32,8 +32,11 @@ export default function App() {
         </usernameContext.Provider>
     </BrowserRouter>;
 async function logout() {
-    setAuthenticated(false)
-    localStorage.removeItem('username')
+    fetch ('/api/account/logout', {method: 'delete'})
+        .then(() => {
+            setAuthenticated(false)
+            localStorage.removeItem('username')
+        })
 }
 
 function Header() {
