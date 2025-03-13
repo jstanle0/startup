@@ -15,7 +15,7 @@ export function Login() {
         React.useEffect(() =>navigate('/home'), [])
     }
     
-    async function processLogin() {
+    async function processLogin(e) {
         e.preventDefault();
         const response = await fetch('/api/account/create', {
             method: 'post',
@@ -49,7 +49,7 @@ export function Login() {
     }
     return <main className="form-signin w-100 m-auto login-main">
     <div className="content-container">
-        <form onSubmit={()=>processLogin()}>
+        <form onSubmit={(e)=>processLogin(e)}>
             <h3>Welcome to Shoot for the Stars!!</h3>
             <div className="form-floating mb-2">
                 <input id="floatingInput" className="form-control bg-light" placeholder="username" value={usernameInput} onChange={(e)=>setUsernameInput(e.target.value)}  autoComplete='off' required/>
