@@ -1,4 +1,5 @@
 const express = require('express')
+const bcrypt = require('bcryptjs')
 const app = express()
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -14,12 +15,13 @@ const users = []
 
 apiRouter.post('/account/create', async (req, res) => {
     if (await findUser('username', req.body.username)) {
-        res.status(409).send({ msg: "existing user" })
+        res.status(409).send({ msg: "Existing user" })
         
     } else {
+        passwordHash = await bcrypt.hash(req.body.password, 10)
         const user = {
             username: req.body.username, 
-            password: req.body.password,
+            password: passwordHash,
         }
         users.push(user)
         console.log(users)
@@ -29,7 +31,7 @@ apiRouter.post('/account/create', async (req, res) => {
 //
 apiRouter.post('/account/login', async (req, res) => {
     const user = await findUser('username', req.body.username)
-    if (user && user.password === req.body.password) {
+    if (user && await bcrypt.compare(req.body.password, user.password)) {
         res.status(200).send({user: user.username})
         return
     }
