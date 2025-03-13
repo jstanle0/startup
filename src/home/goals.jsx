@@ -10,8 +10,13 @@ export function CurrentGoals(props){
       localStorage.setItem(name, JSON.stringify(item))
     }
 
-    const addGoal = (newGoal) =>
+    const addGoal = async (newGoal) =>
         {
+          fetch('/api/home/goal', {
+            method: 'post',
+            body: JSON.stringify({goal: newGoal}),
+            headers: {'Content-type': 'application/json; charset=UTF-8',},
+          });
         setGoals(()=> {
           let newGoals = [...goals, newGoal]
           save('goals', newGoals)

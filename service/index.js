@@ -15,19 +15,32 @@ app.use('/api', apiRouter)
 
 const users = []
 
+//Verification Middleware
 const verify = async (req, res, next) => {
     const user = await findUser('token', req.cookies['token'])
+    res.locals.user = user
     if (user) {
         next();
     } else {
         res.status(401).send({msg: 'unauthorized'})
     }
 }
-
-apiRouter.post('/community/post', verify, async (req, res) =>{
-    res.status(200).send({msg: 'good jorb'})
+//Home
+apiRouter.post('/home/goal', verify, async (req, res)=> {
+    const user = res.locals.user
+    user.goals.push(req.body.goal)
+    res.status(200).send({goal: req.body.goal.name})
 })
 
+//Community
+apiRouter.post('/community/post', verify, async (req, res) =>{
+    res.status(200).send({msg: 'websocket placeholder'})
+})
+apiRouter.get('/community/posts', async (req, res) => {
+    res.status(200).send({msg: 'websocket placeholder'})
+})
+
+//Login
 apiRouter.post('/account/create', async (req, res) => {
     if (await findUser('username', req.body.username)) {
         res.status(409).send({ msg: "Existing user" })
@@ -37,6 +50,8 @@ apiRouter.post('/account/create', async (req, res) => {
         const user = {
             username: req.body.username, 
             password: passwordHash,
+            goals: [],
+            reward: [],
         }
         users.push(user)
         res.status(200).send({user: user.username})
@@ -63,6 +78,8 @@ apiRouter.delete('/account/logout', async (req, res) => {
     res.status(200).send({msg:'Log out successful'})
 })
 
+
+//Errors
 app.use(function (err, req, res, next) {
     res.status(500).send({ type: err.name, message: err.message });
 });
@@ -71,6 +88,7 @@ app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
 });
 
+//Functions
 async function findUser(field, value) {
     if (!value) return null;
     const u = users.find((user)=>user[field]===value);
