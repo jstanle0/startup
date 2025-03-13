@@ -17,7 +17,7 @@ export function Login() {
     
     async function processLogin(e) {
         e.preventDefault();
-        const response = await fetch('/api/account/create', {
+        const response = await fetch('/api/account/login', {
             method: 'post',
             body: JSON.stringify({username: usernameInput, password: passwordInput}),
             headers: {
@@ -25,10 +25,10 @@ export function Login() {
                   },
         })
         if (response.status === 200) {
-        setUsername(usernameInput);
-        setAuthenticated(true);
-        localStorage.setItem('username', usernameInput)
-        navigate('/home')
+            setUsername(usernameInput);
+            setAuthenticated(true);
+            localStorage.setItem('username', usernameInput)
+            navigate('/home')
         }
     }
     async function createAccount(e) {
@@ -41,10 +41,7 @@ export function Login() {
                   },
         })
         if (response.status === 200) {
-        setUsername(usernameInput);
-        setAuthenticated(true);
-        localStorage.setItem('username', usernameInput)
-        navigate('/home')
+            processLogin(e);
         }
     }
     return <main className="form-signin w-100 m-auto login-main">

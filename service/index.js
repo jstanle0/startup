@@ -21,11 +21,18 @@ apiRouter.post('/account/create', async (req, res) => {
             username: req.body.username, 
             password: req.body.password,
         }
-        
         users.push(user)
         console.log(users)
         res.status(200).send(user)
     }
+})
+//
+apiRouter.post('/account/login', async (req, res) => {
+    if (await findUser('username', req.body.username)) {
+        res.status(200).send({msg: 'good job'})
+        return
+    }
+    res.status(409).send({msg: "Invalid credentials"}) 
 })
 
 app.use(function (err, req, res, next) {
