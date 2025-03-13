@@ -5,8 +5,25 @@ import { Reward } from './reward';
 
 export function DisplayReward(props) {
     const {starCount, setStarCount} = React.useContext(starCountContext)
-    const [currentReward, setCurrentReward] = React.useState(JSON.parse(localStorage.getItem('reward')) || '')
-    const [rewardExists, setRewardExists] = React.useState(currentReward ? true : false)
+    const [currentReward, setCurrentReward] = React.useState('')
+    const [rewardExists, setRewardExists] = React.useState(false)
+
+    const getReward = async()=>{
+        const response = await fetch('/api/home/reward', {
+            method:'get',
+        })
+        if (response.ok) {
+            const body = await response.json()
+            if (body.reward) {
+                setCurrentReward(body.reward)
+                setRewardExists(true)
+            } 
+        }
+    }
+
+    React.useEffect(()=>{
+        getReward();
+    }, [])
 
     async function save(name, item) {
         localStorage.setItem(name, JSON.stringify(item))
@@ -20,6 +37,14 @@ export function DisplayReward(props) {
         })
     }
 
+    const updateReward = async (reward) => {
+        fetch('/api/home/reward', {
+            method: 'post',
+            body: JSON.stringify({reward: reward}),
+            headers: {'Content-type': 'application/json; charset=UTF-8'},
+        })
+    }
+
     function ConstructReward({reward}) {
         function completeReward() {
             let newCount = starCount - reward.value
@@ -28,7 +53,7 @@ export function DisplayReward(props) {
             updateStarCount(-reward.value)
             props.handleRecentEvent(['reward', reward])
             setRewardExists(false)
-            save('reward', '')
+            updateReward('')
         }
         function ProgressBar() {
             if (starCount >= reward.value) {
@@ -101,7 +126,7 @@ export function DisplayReward(props) {
             setRewardExists(true)
             let tempReward = new Reward(name, desc, url, value)
             setCurrentReward(tempReward)
-            save('reward', tempReward)
+            updateReward(tempReward)
             }
     
             const [rewardName, setRewardName] = React.useState("");

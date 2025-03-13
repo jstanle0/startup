@@ -52,6 +52,15 @@ apiRouter.put('/home/starCount', verify, async (req, res) =>{
     user.starCount += req.body.starCount;
     res.status(200).send({starCount: user.starCount})
 })
+apiRouter.get('/home/reward', verify, async (req, res) => {
+    const user = res.locals.user;
+    res.status(200).send({reward: user.reward})
+})
+apiRouter.post('/home/reward', verify, async (req, res)=>{
+    const user = res.locals.user;
+    user.reward = req.body.reward;
+    res.status(200).send({reward: user.reward})
+})
 //Community
 apiRouter.post('/community/post', verify, async (req, res) =>{
     res.status(200).send({msg: 'websocket placeholder'})
@@ -71,7 +80,6 @@ apiRouter.post('/account/create', async (req, res) => {
             username: req.body.username, 
             password: passwordHash,
             goals: [],
-            reward: [],
         }
         users.push(user)
         res.status(200).send({user: user.username})
