@@ -13,8 +13,19 @@ app.use('/api', apiRouter)
 const users = []
 
 apiRouter.post('/account/create', async (req, res) => {
-    users.push({username: req.body.username, password: req.body.password})
-    res.status(200).send({name: req.body.username})
+    if (await findUser('username', req.body.username)) {
+        res.status(409).send({msg: "existing user"})
+        
+    } else {
+        const user = {
+            username: req.body.username, 
+            password: req.body.password,
+        }
+        
+        users.push(user)
+        console.log(users)
+        res.status(200).send(user)
+    }
 })
 
 app.use(function (err, req, res, next) {
@@ -24,5 +35,12 @@ app.use(function (err, req, res, next) {
 app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
 });
+
+async function findUser(field, value) {
+    if (!value) return null;
+    const u = users.find((user)=>user[field]===value);
+    console.log(u);
+    return u;
+}
 
 app.listen(port, () => { console.log(`listening on port ${port}`) });

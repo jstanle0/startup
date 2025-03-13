@@ -16,12 +16,7 @@ export function Login() {
     }
     
     async function processLogin() {
-        setUsername(usernameInput);
-        setAuthenticated(true);
-        localStorage.setItem('username', usernameInput)
-        navigate('/home')
-    }
-    async function createAccount() {
+        e.preventDefault();
         const response = await fetch('/api/account/create', {
             method: 'post',
             body: JSON.stringify({username: usernameInput, password: passwordInput}),
@@ -29,7 +24,23 @@ export function Login() {
                     'Content-type': 'application/json; charset=UTF-8',
                   },
         })
-        if (response.ok) {
+        if (response.status === 200) {
+        setUsername(usernameInput);
+        setAuthenticated(true);
+        localStorage.setItem('username', usernameInput)
+        navigate('/home')
+        }
+    }
+    async function createAccount(e) {
+        e.preventDefault();
+        const response = await fetch('/api/account/create', {
+            method: 'post',
+            body: JSON.stringify({username: usernameInput, password: passwordInput}),
+            headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                  },
+        })
+        if (response.status === 200) {
         setUsername(usernameInput);
         setAuthenticated(true);
         localStorage.setItem('username', usernameInput)
@@ -49,7 +60,7 @@ export function Login() {
                 <label for="floatingPassword">Password</label>
             </div>
             <button class="btn btn-primary w-100 py-2" type="submit" disabled={!usernameInput||!passwordInput}>Sign in</button>
-            <button class="btn w-100 py-2" onClick={()=>createAccount()} disabled={!usernameInput||!passwordInput}>Create account</button>
+            <button class="btn w-100 py-2" onClick={(e)=>createAccount(e)} disabled={!usernameInput||!passwordInput}>Create account</button>
         </form>
     </div>
 </main>;
