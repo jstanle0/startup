@@ -121,11 +121,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Both node and express installed. Express imported in index.js and listens on port 4000
+- [x] **Static middleware for frontend** - Backend statically sends public directory
+- [x] **Calls to third party endpoints** - Placeholder cat image for invalid reward urls. Plans to add more services in the future.
+- [x] **Backend service endpoints** - Backend endpoints for authentication and storing/getting user data
+- [x] **Frontend calls service endpoints** - Frontend code sends user request and displays information from server.
+- [x] **Supports registration, login, logout, and restricted endpoint** - Fully support authentication and restricts access to play page.
 
 ## 🚀 DB/Login deliverable
 
