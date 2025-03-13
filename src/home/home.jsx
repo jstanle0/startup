@@ -19,8 +19,8 @@ export function Home() {
     async function getStarCount() {
         const response = await fetch('/api/home/starCount', {method: 'get'});
         if (response.ok) {
-            const body = response.json();
-            setStarCount(body.starCount || 0)
+            const body = await response.json();
+            setStarCount(body.starCount)
         }
     }
 

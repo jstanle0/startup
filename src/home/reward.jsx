@@ -12,13 +12,20 @@ export function DisplayReward(props) {
         localStorage.setItem(name, JSON.stringify(item))
     }
 
-
+    const updateStarCount = async (starChange) => {
+        fetch('/api/home/starCount', {
+          method: 'put',
+          body: JSON.stringify({starCount: starChange}),
+          headers: {'Content-type': 'application/json; charset=UTF-8'},
+        })
+    }
 
     function ConstructReward({reward}) {
         function completeReward() {
             let newCount = starCount - reward.value
             setStarCount(newCount)
-            save('starCount', newCount)
+            //save('starCount', newCount)
+            updateStarCount(-reward.value)
             props.handleRecentEvent(['reward', reward])
             setRewardExists(false)
             save('reward', '')
