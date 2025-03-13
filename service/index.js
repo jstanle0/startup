@@ -1,12 +1,14 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
+const uuid = require('uuid')
+const cookieParser = require('cookie-parser')
 const app = express()
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
-
-app.use(express.static('public'))
+app.use(cookieParser());
+app.use(express.static('public'));
 
 const apiRouter = express.Router()
 app.use('/api', apiRouter)
@@ -24,7 +26,6 @@ apiRouter.post('/account/create', async (req, res) => {
             password: passwordHash,
         }
         users.push(user)
-        console.log(users)
         res.status(200).send({user: user.username})
     }
 })
@@ -32,6 +33,8 @@ apiRouter.post('/account/create', async (req, res) => {
 apiRouter.post('/account/login', async (req, res) => {
     const user = await findUser('username', req.body.username)
     if (user && await bcrypt.compare(req.body.password, user.password)) {
+        user.token = uuid.v4();
+        res.cookie('token', user.token, {secure:true, httpOnly:true, sameSite:'strict'})
         res.status(200).send({user: user.username})
         return
     }
@@ -49,7 +52,6 @@ app.use((_req, res) => {
 async function findUser(field, value) {
     if (!value) return null;
     const u = users.find((user)=>user[field]===value);
-    console.log(u);
     return u;
 }
 
