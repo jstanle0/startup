@@ -27,11 +27,14 @@ const verify = async (req, res, next) => {
 }
 //Home
 apiRouter.post('/home/goal', verify, async (req, res)=> {
-    const user = res.locals.user
-    user.goals.push(req.body.goal)
-    res.status(200).send({goal: req.body.goal.name})
+    const user = res.locals.user;
+    user.goals.push(req.body.goal);
+    res.status(200).send({goal: req.body.goal.name});
 })
-
+apiRouter.get('/home/goals', verify, async (req, res)=>{
+    const user = res.locals.user;
+    res.status(200).send({goals: user.goals})
+})
 //Community
 apiRouter.post('/community/post', verify, async (req, res) =>{
     res.status(200).send({msg: 'websocket placeholder'})

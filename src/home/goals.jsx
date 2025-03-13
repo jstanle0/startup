@@ -4,12 +4,23 @@ import {Goal} from './goal';
 import { starCountContext } from "./home";
 
 export function CurrentGoals(props){
-    const [goals, setGoals] = React.useState(JSON.parse(localStorage.getItem('goals')) || []);
+    const [goals, setGoals] = React.useState([]);
     const {starCount, setStarCount} = React.useContext(starCountContext);
     async function save(name, item) {
       localStorage.setItem(name, JSON.stringify(item))
     }
-
+    async function getGoals() {
+      const response = await fetch('/api/home/goals', {
+        method: 'get',
+      })
+      if (response.status===200) {
+        const body = await response.json();
+        setGoals(body.goals);
+      }
+    }
+    React.useEffect(()=>{
+      getGoals()
+    }, [])
     const addGoal = async (newGoal) =>
         {
           fetch('/api/home/goal', {
