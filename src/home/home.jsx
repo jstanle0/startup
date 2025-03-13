@@ -11,12 +11,23 @@ Modal.setAppElement(document.getElementById('root'));
 export const starCountContext = React.createContext(null)
 
 export function Home() {
-    const [starCount, setStarCount] = React.useState(JSON.parse(localStorage.getItem('starCount')) || 0)
+    const [starCount, setStarCount] = React.useState(0)
     const {username, _} = React.useContext(usernameContext)
     const {authenticated, __} = React.useContext(authenticatedContext)
     const [starSrc, setStarSrc] = React.useState(null)
 
-    React.useEffect(()=> setStarSrc('/images/star.png'))
+    async function getStarCount() {
+        const response = await fetch('/api/home/starCount', {method: 'get'});
+        if (response.ok) {
+            const body = response.json();
+            setStarCount(body.starCount || 0)
+        }
+    }
+
+    React.useEffect(()=> {
+        setStarSrc('/images/star.png')
+        getStarCount();
+        }, [])
 
     if (!authenticated) {
         return <main>please log in to see this content</main>

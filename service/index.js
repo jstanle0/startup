@@ -40,6 +40,18 @@ apiRouter.delete('/home/goal', verify, async (req, res) => {
     user.goals.splice(req.body.index, 1)
     res.status(200).send({goals: user.goals})
 })
+apiRouter.get('/home/starCount', verify, async (req,res)=>{
+    const user = res.locals.user;
+    if (!user.starCount) {
+        user.starCount = 0;
+    } 
+    res.status(200).send({starCount: user.starCount});
+})
+apiRouter.put('/home/starCount', verify, async (req, res) =>{
+    const user = res.locals.user;
+    user.starCount += req.body.starCount;
+    res.status(200).send({starCount: user.starCount})
+})
 //Community
 apiRouter.post('/community/post', verify, async (req, res) =>{
     res.status(200).send({msg: 'websocket placeholder'})
