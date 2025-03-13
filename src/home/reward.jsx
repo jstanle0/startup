@@ -7,6 +7,7 @@ export function DisplayReward(props) {
     const {starCount, setStarCount} = React.useContext(starCountContext)
     const [currentReward, setCurrentReward] = React.useState('')
     const [rewardExists, setRewardExists] = React.useState(false)
+    const [catImage, setCatImage] = React.useState('')
 
     const getReward = async()=>{
         const response = await fetch('/api/home/reward', {
@@ -20,9 +21,20 @@ export function DisplayReward(props) {
             } 
         }
     }
+    const getCatImage = async()=>{
+        const response = await fetch('https://cataas.com/cat?json=true', {
+            method: 'get',
+            headers: {'Content-type': 'application/json'}
+        })
+        if (response.ok) {
+            const body = await response.json()
+            setCatImage(body.url)
+        }
+    }
 
     React.useEffect(()=>{
         getReward();
+        getCatImage();
     }, [])
 
     async function save(name, item) {
@@ -79,8 +91,8 @@ export function DisplayReward(props) {
     </div>*/}
     <div className="card mb-3" style={{maxWidth: '540px', border: 'none'}}>
         <div className="row g-0">
-            <div className="col-md-4 bg-primary rounded-start" style={{display: 'flex', alignItems: 'center'}}>
-            <img src={reward.url} className="img-fluid rounded-start" alt={reward.url}/>
+            <div className="col-md-4 bg-primary rounded-start" style={{display: 'flex', alignItems: 'center'}}>      
+            <img src={reward.url} onError={(e)=>{e.target.onError = null; e.target.src = catImage}} width='100px' alt={reward.url}/>
             </div>
             <div className="col-md-8">
                 <div className="card-body bg-warning rounded-end">
