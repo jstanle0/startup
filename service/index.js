@@ -14,7 +14,7 @@ const users = []
 
 apiRouter.post('/account/create', async (req, res) => {
     if (await findUser('username', req.body.username)) {
-        res.status(409).send({msg: "existing user"})
+        res.status(409).send({ msg: "existing user" })
         
     } else {
         const user = {
@@ -33,7 +33,7 @@ apiRouter.post('/account/login', async (req, res) => {
         res.status(200).send({user: user.username})
         return
     }
-    res.status(409).send({msg: "Invalid credentials"}) 
+    res.status(409).send( { msg: "Invalid credentials" } ) 
 })
 
 app.use(function (err, req, res, next) {

@@ -9,6 +9,7 @@ export function Login() {
     const {authenticated, setAuthenticated} = React.useContext(authenticatedContext);
     const [usernameInput, setUsernameInput] = React.useState('');
     const [passwordInput, setPasswordInput] = React.useState('');
+    const [displayError, setDisplayError] = React.useState('');
     const navigate = useNavigate();
 
     if (authenticated) {
@@ -29,6 +30,13 @@ export function Login() {
             setAuthenticated(true);
             localStorage.setItem('username', usernameInput)
             navigate('/home')
+        } else {
+            const body = await response.json()
+            if (await body) {
+                setDisplayError(body.msg)
+            } else {
+                setDisplayError("Server Error")
+            }
         }
     }
     async function createAccount(e) {
@@ -42,6 +50,13 @@ export function Login() {
         })
         if (response.status === 200) {
             processLogin(e);
+        } else {
+            const body = await response.json()
+            if (body) {
+                setDisplayError(body.msg)
+            } else {
+                setDisplayError("Server Error")
+            }
         }
     }
     return <main className="form-signin w-100 m-auto login-main">
@@ -58,6 +73,7 @@ export function Login() {
             </div>
             <button class="btn btn-primary w-100 py-2" type="submit" disabled={!usernameInput||!passwordInput}>Sign in</button>
             <button class="btn w-100 py-2" onClick={(e)=>createAccount(e)} disabled={!usernameInput||!passwordInput}>Create account</button>
+            {displayError && (<div className="badge text-bg-secondary">Error: {displayError}</div>)}
         </form>
     </div>
 </main>;
