@@ -78,11 +78,12 @@ export function Community() {
         const [comments, setComments] = React.useState('')
         const [imageURL, setImageURL] = React.useState('')
 
-        function handleSubmit(e, currentEventIndex, comment, src) {
+        async function handleSubmit(e, currentEventIndex, comment, src) {
           e.preventDefault();
           closeModal()
           let currentEvent = recentEvents[currentEventIndex]
           Notifier.brodcastPost(username, currentEvent[1].name, currentEvent[0], comment, src)
+          fetch('/api/community/post', {method:'post'})
         }
 
         if (recentEvents && username) { 

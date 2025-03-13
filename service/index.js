@@ -15,6 +15,19 @@ app.use('/api', apiRouter)
 
 const users = []
 
+const verify = async (req, res, next) => {
+    const user = await findUser('token', req.cookies['token'])
+    if (user) {
+        next();
+    } else {
+        res.status(401).send({msg: 'unauthorized'})
+    }
+}
+
+apiRouter.post('/community/post', verify, async (req, res) =>{
+    res.status(200).send({msg: 'good jorb'})
+})
+
 apiRouter.post('/account/create', async (req, res) => {
     if (await findUser('username', req.body.username)) {
         res.status(409).send({ msg: "Existing user" })
