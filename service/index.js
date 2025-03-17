@@ -2,6 +2,7 @@ const express = require('express')
 const bcrypt = require('bcryptjs')
 const uuid = require('uuid')
 const cookieParser = require('cookie-parser')
+const DB = require('./database')
 const app = express()
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -82,6 +83,7 @@ apiRouter.post('/account/create', async (req, res) => {
             goals: [],
         }
         users.push(user)
+        await DB.createUser(user)
         res.status(200).send({user: user.username})
     }
 })
@@ -119,8 +121,10 @@ app.use((_req, res) => {
 //Functions
 async function findUser(field, value) {
     if (!value) return null;
-    const u = users.find((user)=>user[field]===value);
-    return u;
+    if (field == 'token') {
+        return
+    }
+    return await DB.getUser(value);
 }
 
 app.listen(port, () => { console.log(`listening on port ${port}`) });
