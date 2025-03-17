@@ -27,9 +27,14 @@ function getUser(username) {
     return userCollection.findOne({username: username});
 }
 
+function getUserByToken(token) {
+    return userCollection.findOne({token: token});
+}
+
 
 module.exports = {
     createUser,
     getUser,
     updateUser,
+    getUserByToken,
 }

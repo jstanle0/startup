@@ -30,6 +30,7 @@ const verify = async (req, res, next) => {
 apiRouter.post('/home/goal', verify, async (req, res)=> {
     const user = res.locals.user;
     user.goals.push(req.body.goal);
+    DB.updateUser(user)
     res.status(200).send({goal: req.body.goal.name});
 })
 apiRouter.get('/home/goals', verify, async (req, res)=>{
@@ -45,12 +46,14 @@ apiRouter.get('/home/starCount', verify, async (req,res)=>{
     const user = res.locals.user;
     if (!user.starCount) {
         user.starCount = 0;
+        await DB.updateUser(user);
     } 
     res.status(200).send({starCount: user.starCount});
 })
 apiRouter.put('/home/starCount', verify, async (req, res) =>{
     const user = res.locals.user;
     user.starCount += req.body.starCount;
+    await DB.updateUser(user);
     res.status(200).send({starCount: user.starCount})
 })
 apiRouter.get('/home/reward', verify, async (req, res) => {
@@ -60,6 +63,7 @@ apiRouter.get('/home/reward', verify, async (req, res) => {
 apiRouter.post('/home/reward', verify, async (req, res)=>{
     const user = res.locals.user;
     user.reward = req.body.reward;
+    await DB.updateUser(user)
     res.status(200).send({reward: user.reward})
 })
 //Community
@@ -123,7 +127,7 @@ app.use((_req, res) => {
 async function findUser(field, value) {
     if (!value) return null;
     if (field == 'token') {
-        return
+        return await DB.getUserByToken(value)
     }
     return await DB.getUser(value);
 }
