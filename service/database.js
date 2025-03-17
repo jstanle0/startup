@@ -20,7 +20,7 @@ async function createUser(user) {
 }
 
 async function updateUser(user) {
-    await userCollection.updateOne({email: user.email},{$set: user})
+    await userCollection.updateOne({_id: user._id},{$set: user})
 }
 
 function getUser(username) {

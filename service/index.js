@@ -108,6 +108,7 @@ apiRouter.delete('/account/logout', async (req, res) => {
     const user = await findUser('token', req.cookies['token'])
     if (user) {
         delete user.token
+        DB.updateUser(user)
     }
     res.clearCookie('token')
     res.status(200).send({msg:'Log out successful'})
