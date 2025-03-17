@@ -93,6 +93,7 @@ apiRouter.post('/account/login', async (req, res) => {
     if (user && await bcrypt.compare(req.body.password, user.password)) {
         user.token = uuid.v4();
         res.cookie('token', user.token, {secure:true, httpOnly:true, sameSite:'strict'})
+        await DB.updateUser(user)
         res.status(200).send({user: user.username})
         return
     }
