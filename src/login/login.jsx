@@ -31,10 +31,12 @@ export function Login() {
             localStorage.setItem('username', usernameInput)
             navigate('/home')
         } else {
-            const body = await response.json()
-            if (await body) {
-                setDisplayError(body.msg)
-            } else {
+            try {
+                const body = await response.json()
+                if (await body) {
+                    setDisplayError(body.msg)
+                }} 
+            catch {
                 setDisplayError("Server Error")
             }
         }
@@ -51,10 +53,12 @@ export function Login() {
         if (response.status === 200) {
             processLogin(e);
         } else {
-            const body = await response.json()
-            if (body) {
-                setDisplayError(body.msg)
-            } else {
+            try {
+                const body = await response.json()
+                if (body) {
+                    setDisplayError(body.msg)
+                } }
+            catch {
                 setDisplayError("Server Error")
             }
         }

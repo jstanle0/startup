@@ -14,8 +14,6 @@ app.use(express.static('public'));
 const apiRouter = express.Router()
 app.use('/api', apiRouter)
 
-const users = []
-
 //Verification Middleware
 const verify = async (req, res, next) => {
     const user = await findUser('token', req.cookies['token'])
@@ -86,7 +84,6 @@ apiRouter.post('/account/create', async (req, res) => {
             password: passwordHash,
             goals: [],
         }
-        users.push(user)
         await DB.createUser(user)
         res.status(200).send({user: user.username})
     }
