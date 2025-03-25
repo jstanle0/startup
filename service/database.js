@@ -19,7 +19,7 @@ let postCollection = null;
               metaField: "metadata",
               granularity: "hours"
            },
-           expireAfterSeconds: 10
+           expireAfterSeconds: 10,
         }
     );
 } catch (ex) {
@@ -46,11 +46,6 @@ function getUserByToken(token) {
 async function addPost(post) {
     await postCollection.insertOne(post)
 }
-
-async function getPosts() {
-    return await postCollection.find()
-}
-
 
 module.exports = {
     createUser,
