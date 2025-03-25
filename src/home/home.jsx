@@ -20,7 +20,7 @@ export function Home() {
         const response = await fetch('/api/home/starCount', {method: 'get'});
         if (response.ok) {
             const body = await response.json();
-            setStarCount(body.starCount)
+            setStarCount(body.starCount);
         }
     }
 
@@ -38,15 +38,18 @@ export function Home() {
         localStorage.setItem(name, JSON.stringify(item))
       }
   
-    function handleRecentEvent(event) {
-        setRecentEvents(()=>{
-          let newRecentEvents = [event, ...recentEvents]
-          if (newRecentEvents.length > 5) {
-              newRecentEvents = newRecentEvents.slice(0, 5);
-          }
-          save('recentEvents', newRecentEvents)
-          return newRecentEvents
-        })
+    async function handleRecentEvent(event) {//Obsolete
+        const response = await fetch('/api/community/recentEvents', {
+            method: 'post',
+            body: JSON.stringify({event: event}),
+            headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+            },
+        });
+        if (response.ok) {
+            const body = await response.json()
+            setRecentEvents(body.recentEvents)
+        }
     }
 
     return <main>

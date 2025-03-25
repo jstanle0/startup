@@ -6,7 +6,7 @@ import { starCountContext } from "./home";
 export function CurrentGoals(props){
     const [goals, setGoals] = React.useState([]);
     const {starCount, setStarCount} = React.useContext(starCountContext);
-    async function save(name, item) {
+    async function save(name, item) {//Obsolete
       localStorage.setItem(name, JSON.stringify(item))
     }
 
@@ -38,7 +38,7 @@ export function CurrentGoals(props){
         })
     }
 
-    const updateStarCount = async (starChange) => {
+    const updateStarCount = async (starChange) => {//Obsolete
       fetch('/api/home/starCount', {
         method: 'put',
         body: JSON.stringify({starCount: starChange}),
@@ -46,10 +46,10 @@ export function CurrentGoals(props){
       })
     }
 
-    async function changeGoals(goalId) {
+    async function changeGoals(goalId, starChange) {
       const response = await fetch('/api/home/goal', {
         method: 'delete',
-        body: JSON.stringify({index: goalId}),
+        body: JSON.stringify({index: goalId, starChange: starChange}),
         headers: {'Content-type': 'application/json; charset=UTF-8',},
       })
       if (response.ok) {
@@ -60,11 +60,11 @@ export function CurrentGoals(props){
 
     const removeGoal = (goalId) => {
       let newCount = starCount + goals[goalId].count
-      updateStarCount(goals[goalId].count)
+      //updateStarCount()
       setStarCount(newCount)
       //save('starCount', newCount)
-      props.handleRecentEvent(['goal', goals[goalId]])
-      changeGoals(goalId);
+      //props.handleRecentEvent(['goal', goals[goalId]])
+      changeGoals(goalId, goals[goalId].count);
       
       //save('goals', newGoals)
     }

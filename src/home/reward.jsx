@@ -49,10 +49,10 @@ export function DisplayReward(props) {
         })
     }
 
-    const updateReward = async (reward) => {
+    const updateReward = async (reward, starChange=0) => {
         fetch('/api/home/reward', {
             method: 'post',
-            body: JSON.stringify({reward: reward}),
+            body: JSON.stringify({reward: reward, starChange: starChange}),
             headers: {'Content-type': 'application/json; charset=UTF-8'},
         })
     }
@@ -62,10 +62,10 @@ export function DisplayReward(props) {
             let newCount = starCount - reward.value
             setStarCount(newCount)
             //save('starCount', newCount)
-            updateStarCount(-reward.value)
-            props.handleRecentEvent(['reward', reward])
+            //updateStarCount(-reward.value)
+            //props.handleRecentEvent(['reward', reward])
             setRewardExists(false)
-            updateReward('')
+            updateReward('', -reward.value)
         }
         function ProgressBar() {
             if (starCount >= reward.value) {

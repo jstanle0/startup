@@ -37,18 +37,21 @@ apiRouter.get('/home/goals', verify, async (req, res)=>{
 })
 apiRouter.delete('/home/goal', verify, async (req, res) => {
     const user = res.locals.user;
-    user.goals.splice(req.body.index, 1)
-    res.status(200).send({goals: user.goals})
+    user.recentEvents = setRecentEvents(user, user.goals[req.body.index], "goal");
+    user.goals.splice(req.body.index, 1);
+    user.starCount += req.body.starChange;
+    await DB.updateUser(user);
+    res.status(200).send({goals: user.goals});
 })
 apiRouter.get('/home/starCount', verify, async (req,res)=>{
     const user = res.locals.user;
     if (!user.starCount) {
         user.starCount = 0;
         await DB.updateUser(user);
-    } 
+    }
     res.status(200).send({starCount: user.starCount});
 })
-apiRouter.put('/home/starCount', verify, async (req, res) =>{
+apiRouter.put('/home/starCount', verify, async (req, res) =>{//Obsolete
     const user = res.locals.user;
     user.starCount += req.body.starCount;
     await DB.updateUser(user);
@@ -60,11 +63,29 @@ apiRouter.get('/home/reward', verify, async (req, res) => {
 })
 apiRouter.post('/home/reward', verify, async (req, res)=>{
     const user = res.locals.user;
+    if (req.body.starChange) {
+        user.starCount += req.body.starChange;
+        user.recentEvents = setRecentEvents(user, user.reward, "reward")
+    }
     user.reward = req.body.reward;
     await DB.updateUser(user)
     res.status(200).send({reward: user.reward})
 })
 //Community
+function setRecentEvents(user, event, name) {
+    if (!user.recentEvents) {
+        user.recentEvents = []
+    }
+    let newRecentEvents = [[name, event], ...user.recentEvents]
+    if (newRecentEvents.length > 5) {
+        newRecentEvents = newRecentEvents.slice(0, 5);
+    }
+    return newRecentEvents
+}
+apiRouter.get('/community/recentEvents', verify, async (req, res) => {
+    const user = res.locals.user;
+    res.status(200).send({recentEvents: user.recentEvents})
+})
 apiRouter.post('/community/post', verify, async (req, res) =>{
     res.status(200).send({msg: 'websocket placeholder'})
 })

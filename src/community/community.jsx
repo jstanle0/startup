@@ -7,11 +7,19 @@ import { usernameContext } from '../app';
 
 export function Community() {
     const [posts, setPosts] = React.useState([]);
-    const [recentEvents, setRecentEvents] = React.useState(JSON.parse(localStorage.getItem('recentEvents'))||'')
+    const [recentEvents, setRecentEvents] = React.useState('')
     const {username, setUsername} = React.useContext(usernameContext)
     
+    async function getRecentEvents() {
+      const response = await fetch('/api/community/recentEvents', {method: 'get'})
+      if (response.ok) {
+        const body = await response.json()
+        setRecentEvents(body.recentEvents)
+      }
+    }
 
     React.useEffect(()=> {
+      getRecentEvents();
       Notifier.addHandler(notificationHandler);
       return () => Notifier.removeHandler(notificationHandler);
     }, []);
