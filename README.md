@@ -133,7 +133,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **Stores data in MongoDB** - Stores users goal, reward, star count, and recent events in mongoDB
-- [x] **Stores credentials in MongoDB** - Stores login information in MongoDB
+- [x] **Stores and retrieves credentials in MongoDB** - Stores login information in MongoDB, retrieves credientials to compare
 
 ## 🚀 WebSocket deliverable
 
