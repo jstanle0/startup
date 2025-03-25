@@ -1,9 +1,10 @@
-const express = require('express')
-const bcrypt = require('bcryptjs')
-const uuid = require('uuid')
-const cookieParser = require('cookie-parser')
-const DB = require('./database')
-const app = express()
+const express = require('express');
+const bcrypt = require('bcryptjs');
+const uuid = require('uuid');
+const cookieParser = require('cookie-parser');
+const DB = require('./database');
+const app = express();
+const { peerProxy } = require('./peerProxy');
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -148,4 +149,6 @@ async function findUser(field, value) {
     return await DB.getUser(value);
 }
 
-app.listen(port, () => { console.log(`listening on port ${port}`) });
+const server = app.listen(port, () => { console.log(`listening on port ${port}`) });
+
+peerProxy(server)
