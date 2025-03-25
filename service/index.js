@@ -51,12 +51,6 @@ apiRouter.get('/home/starCount', verify, async (req,res)=>{
     }
     res.status(200).send({starCount: user.starCount});
 })
-apiRouter.put('/home/starCount', verify, async (req, res) =>{//Obsolete
-    const user = res.locals.user;
-    user.starCount += req.body.starCount;
-    await DB.updateUser(user);
-    res.status(200).send({starCount: user.starCount})
-})
 apiRouter.get('/home/reward', verify, async (req, res) => {
     const user = res.locals.user;
     res.status(200).send({reward: user.reward})
