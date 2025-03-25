@@ -6,10 +6,22 @@ const url = `mongodb+srv://${config.username}:${config.password}@${config.hostNa
 const client = new MongoClient(url);
 const db = client.db('ShootForTheStars');
 const userCollection = db.collection('users');
+let postCollection = null;
 
 (async function testConnection() {try {
     await db.command({ping: 1})
     console.log(`DB connect to ${config.hostName}`);
+    postCollection = await db.createCollection(
+        "posts",
+        {
+           timeseries: {
+              timeField: "timestamp",
+              metaField: "metadata",
+              granularity: "hours"
+           },
+           expireAfterSeconds: 10
+        }
+    );
 } catch (ex) {
     console.log(`Error with ${config.hostName}, ${ex.message}`);
     process.exit(1);
@@ -31,10 +43,19 @@ function getUserByToken(token) {
     return userCollection.findOne({token: token});
 }
 
+async function addPost(post) {
+    await postCollection.insertOne(post)
+}
+
+async function getPosts() {
+    return await postCollection.find()
+}
+
 
 module.exports = {
     createUser,
     getUser,
     updateUser,
     getUserByToken,
+    addPost,
 }

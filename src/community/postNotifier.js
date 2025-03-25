@@ -48,4 +48,4 @@ class PostNotifer {
     }
 }
 const Notifier = new PostNotifer()
-export {Notifier}
+export {Notifier, Post}

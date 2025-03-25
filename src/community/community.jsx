@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import './community.css';
 
-import { Notifier } from './postNotifier';
+import { Notifier, Post } from './postNotifier';
 import { usernameContext } from '../app';
 
 export function Community() {
@@ -91,7 +91,13 @@ export function Community() {
           closeModal()
           let currentEvent = recentEvents[currentEventIndex]
           Notifier.brodcastPost(username, currentEvent[1].name, currentEvent[0], comment, src)
-          fetch('/api/community/post', {method:'post'})
+          fetch('/api/community/post', {
+            method:'post',
+            body: JSON.stringify({post: new Post(username, currentEvent[1].name, currentEvent[0], comment, src)}),
+            headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                  },
+          })
         }
 
         if (recentEvents && username) { 

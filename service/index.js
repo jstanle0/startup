@@ -81,6 +81,7 @@ apiRouter.get('/community/recentEvents', verify, async (req, res) => {
     res.status(200).send({recentEvents: user.recentEvents})
 })
 apiRouter.post('/community/post', verify, async (req, res) =>{
+    DB.addPost(req.body.post)
     res.status(200).send({msg: 'websocket placeholder'})
 })
 apiRouter.get('/community/posts', async (req, res) => {
