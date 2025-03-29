@@ -8,14 +8,14 @@ function peerProxy(server) {
 
         socket.on('message', function message(data) {
             socketServer.clients.forEach((client)=>{
-                if (/*client !== socket &&*/ client.readyState === WebSocket.OPEN){
+                if (client !== socket && client.readyState === WebSocket.OPEN){
                     client.send(data);
                 };
             });
         })
 
         socket.on('pong', ()=>{
-            socket.alive = true;
+            socket.isAlive = true;
         })
     })
     setInterval(()=>{
