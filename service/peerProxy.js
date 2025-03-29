@@ -18,17 +18,17 @@ function peerProxy(server) {
         socket.on('pong', ()=>{
             socket.alive = true;
         })
-
-        setInterval(()=>{
-            socketServer.clients.forEach(function each(client){
-                if (client.isAlive === false) return client.terminate();
-
-                client.isAlive = false;
-                client.ping()
-            });
-        }, 10000);
     })
+    setInterval(()=>{
+        socketServer.clients.forEach(function each(client){
+            if (client.isAlive === false) return client.terminate();
+
+            client.isAlive = false;
+            client.ping()
+        });
+    }, 10000);
 }
+
 
 module.exports = {
     peerProxy
