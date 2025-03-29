@@ -22,8 +22,18 @@ class PostNotifer {
 
         this.socket.onopen = (event) => {
             this.connected=true
-            console.log("connected!")
+            console.log("WS connected!")
             //this.notifyObservers()
+        }
+        this.socket.onclose = () =>{
+            this.connected = false
+            console.log("WS disconnected")
+        }
+        this.socket.onmessage = async (msg) => {
+            try {
+                const post = JSON.parse(await msg.data.text());
+                this.recievePost(post)
+            } catch {}
         }
         /*setInterval(()=> {
             const username = randomElement(['Suzy', 'Bill', 'Todd', 'KillerMan47', 'Donkey Kong'])
@@ -36,6 +46,7 @@ class PostNotifer {
     }
     brodcastPost(username, name, type, message, imageSrc) {
         const post = new Post(username, name, type, message, imageSrc)
+        this.socket.send(JSON.stringify(post))
         this.recievePost(post)
     }
     recievePost(post) {

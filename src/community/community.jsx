@@ -74,14 +74,6 @@ export function Community() {
             },
         };
 
-       /* function displayRecentEvents() {
-          let formattedEvents = [];
-          for (const [i, recentEvent] of recentEvents.entries()) {
-            console.log(recentEvent)
-            formattedEvents.push(<option key={i}>{recentEvent}</option>);//recentEvent[1]}: {recentEvent[2].name}</option>);
-          }
-          return formattedEvents;
-        };*/
         const [selectedEvent, setSelectedEvent] = React.useState()
         const [comments, setComments] = React.useState('')
         const [imageURL, setImageURL] = React.useState('')
@@ -137,12 +129,10 @@ export function Community() {
     return <main className="community-main">
     <h3>Welcome to the community page!</h3>
     <AddPostModal />
-    <p>Finding posts near you...</p>
+    {!Notifier.connected && <p>Connecting to server...</p>}
+    {Notifier.connected && <p>Finding posts near you...</p>}
         <div className="community-content-container">
-          {displayPosts()/*<FormatPost name="Suzy reached their reward!" caption="I earned 500 stars and got the ferrari!" image="/images/ferrari.jpeg"/>
-          <FormatPost name="Chris acheived their goal!" caption="I mowed my lawn!" image="/images/lawnmower.jpeg"/>
-          <FormatPost name="Russel acheived their goal!" caption="I did my CS260 Homework!" image="/images/sketch1.jpeg"/>
-          <FormatPost name="Terrie earned their reward!" caption="I got 10000 stars and earned a camera!" image="/images/camera.jpeg"/>*/}
+          {displayPosts()}
         </div>
     </main>;
 }
