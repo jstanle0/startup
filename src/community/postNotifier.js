@@ -14,6 +14,7 @@ class PostNotifer {
     constructor() {
         this.posts = [];
         this.handlers = [];
+        this.cache = [];
         this.isPaused = false;
         this.connected = false;
 
@@ -23,7 +24,6 @@ class PostNotifer {
         this.socket.onopen = (event) => {
             this.connected=true
             console.log("WS connected!")
-            //this.notifyObservers()
         }
         this.socket.onclose = () =>{
             this.connected = false
@@ -51,8 +51,10 @@ class PostNotifer {
     }
     recievePost(post) {
         if (!this.isPaused) {
-        this.posts.push(post)
-        this.handlers.forEach((handler) => handler(post))
+            this.posts.push(post)
+            this.handlers.forEach((handler) => handler(post))
+        } else {
+            this.cache.push(post)
         }
     }
     pause(){
@@ -60,6 +62,11 @@ class PostNotifer {
     }
     resume(){
         this.isPaused=false
+        for (const post of this.cache) {
+            this.posts.push(post)
+            this.handlers.forEach((handler) => handler(post))
+        }
+        this.cache = []
     }
     addHandler(handler) {
         this.handlers.push(handler)
