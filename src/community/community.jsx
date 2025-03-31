@@ -83,13 +83,13 @@ export function Community() {
           closeModal()
           let currentEvent = recentEvents[currentEventIndex]
           Notifier.brodcastPost(username, currentEvent[1].name, currentEvent[0], comment, src)
-          fetch('/api/community/post', {
+          /*fetch('/api/community/post', {
             method:'post',
             body: JSON.stringify({post: new Post(username, currentEvent[1].name, currentEvent[0], comment, src)}),
             headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                   },
-          })
+          })*/
         }
 
         if (recentEvents && username) { 

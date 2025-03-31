@@ -38,11 +38,14 @@ export function DisplayReward(props) {
     }, [])
 
     const updateReward = async (reward, starChange=0) => {
-        fetch('/api/home/reward', {
+        const response = await fetch('/api/home/reward', {
             method: 'post',
             body: JSON.stringify({reward: reward, starChange: starChange}),
             headers: {'Content-type': 'application/json; charset=UTF-8'},
         })
+        if (!response.ok) {
+            
+        }
     }
 
     function ConstructReward({reward}) {

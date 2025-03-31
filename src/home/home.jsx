@@ -13,7 +13,7 @@ export const starCountContext = React.createContext(null)
 export function Home() {
     const [starCount, setStarCount] = React.useState(0)
     const {username, _} = React.useContext(usernameContext)
-    const {authenticated, __} = React.useContext(authenticatedContext)
+    const {authenticated, setAuthenticated} = React.useContext(authenticatedContext)
     const [starSrc, setStarSrc] = React.useState(null)
 
     async function getStarCount() {
@@ -21,6 +21,8 @@ export function Home() {
         if (response.ok) {
             const body = await response.json();
             setStarCount(body.starCount);
+        } else if (response.status === 401) {
+            setAuthenticated(false)
         }
     }
 
