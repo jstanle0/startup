@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import { starCountContext } from './home';
+import { starCountContext, serverErrorContext } from './home';
 import { Reward } from './reward';
 
 export function DisplayReward(props) {
@@ -8,6 +8,7 @@ export function DisplayReward(props) {
     const [currentReward, setCurrentReward] = React.useState('')
     const [rewardExists, setRewardExists] = React.useState(false)
     const [catImage, setCatImage] = React.useState('')
+    const {serverError, setServerError} = React.useContext(serverErrorContext)
 
     const getReward = async()=>{
         const response = await fetch('/api/home/reward', {
@@ -44,7 +45,7 @@ export function DisplayReward(props) {
             headers: {'Content-type': 'application/json; charset=UTF-8'},
         })
         if (!response.ok) {
-            
+            setServerError(`Error ${response.status}: Unable to save reward.`)
         }
     }
 
