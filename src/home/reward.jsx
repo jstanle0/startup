@@ -23,7 +23,7 @@ export function DisplayReward(props) {
         }
     }
     const getCatImage = async()=>{
-        const response = await fetch('https://cataas.com/cat?json=true', {
+        const response = await fetch('https://cataas.com/cat?json=true&width=100', {
             method: 'get',
             headers: {'Content-type': 'application/json'}
         })
