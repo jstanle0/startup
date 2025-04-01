@@ -1,11 +1,12 @@
 import React from "react";
 import Modal from 'react-modal';
 import {Goal} from './goal';
-import { starCountContext } from "./home";
+import { starCountContext, serverErrorContext } from "./home";
 
 export function CurrentGoals(props){
     const [goals, setGoals] = React.useState([]);
     const {starCount, setStarCount} = React.useContext(starCountContext);
+    const {serverError, setServerError} = React.useContext(serverErrorContext);
 
     async function getGoals() {
       const response = await fetch('/api/home/goals', {
@@ -21,17 +22,19 @@ export function CurrentGoals(props){
       getGoals()
     }, [])
 
-    const addGoal = async (newGoal) =>
-        {
-          fetch('/api/home/goal', {
-            method: 'post',
-            body: JSON.stringify({goal: newGoal}),
-            headers: {'Content-type': 'application/json; charset=UTF-8',},
-          });
+    const addGoal = async (newGoal) => {
         setGoals(()=> {
           let newGoals = [...goals, newGoal]
           return newGoals
         })
+        const response = await fetch('/api/home/goal', {
+          method: 'post',
+          body: JSON.stringify({goal: newGoal}),
+          headers: {'Content-type': 'application/json; charset=UTF-8',},
+        });
+        if (!response.ok) {
+          setServerError(`Error ${response.status}: Unable to save goal.`)
+        }
     }
 
     async function changeGoals(goalId, starChange) {
@@ -43,6 +46,8 @@ export function CurrentGoals(props){
       if (response.ok) {
         const body = await response.json()
         setGoals(body.goals || [])
+      } else {
+        setServerError(`Error ${response.status}: Unable to save goal.`)
       }
     }
 
