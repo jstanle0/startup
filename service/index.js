@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const DB = require('./database');
 const app = express();
 const { peerProxy } = require('./peerProxy');
+const imageServer = require('./imageServer')
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -149,6 +150,12 @@ async function findUser(field, value) {
     return await DB.getUser(value);
 }
 
+(async function testAWS() {
+    await imageServer.uploadFile('test.txt', 'Hello S3!');
+    const data = await imageServer.readFile('test.txt');
+
+    console.log(data);
+})()
 const server = app.listen(port, () => { console.log(`listening on port ${port}`) });
 
 peerProxy(server)
