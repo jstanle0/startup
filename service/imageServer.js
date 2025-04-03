@@ -1,5 +1,3 @@
-//import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
-//import { fromIni } from '@aws-sdk/credential-providers';
 const AWSClient = require('@aws-sdk/client-s3');
 const credentialProvider = require('@aws-sdk/credential-providers');
 
@@ -24,7 +22,7 @@ async function readFile(fileName) {
     Key: fileName,
   });
   const { Body } = await s3.send(command);
-  return Body.transformToString();
+  return Body.fileName;
 }
 
 module.exports = {

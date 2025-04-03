@@ -38,10 +38,20 @@ export function DisplayReward(props) {
         getCatImage();
     }, [])
 
-    const updateReward = async (reward, starChange=0) => {
+    const updateReward = async (reward, starChange=0, image=null) => {
+        /*console.log(image.name)
+        const formData = new FormData()
+        formData.append('reward',reward)
+        formData.append('starChange', starChange)
+        formData.append('image', image)*/
+        let imageBase64 = 0
+        if (image) {
+            const reader = new FileReader()
+            imageBase64 = await reader.readAsDataURL(image)
+        }
         const response = await fetch('/api/home/reward', {
             method: 'post',
-            body: JSON.stringify({reward: reward, starChange: starChange}),
+            body: JSON.stringify({reward: reward, starChange: starChange, image: imageBase64}),
             headers: {'Content-type': 'application/json; charset=UTF-8'},
         })
         if (!response.ok) {
@@ -112,11 +122,11 @@ export function DisplayReward(props) {
                   // references are now sync'd and can be accessed.
                   subtitle.style.color = '#f00';
                 }*/
-            const handleSubmit = (name, desc, url, value) => {
+            const handleSubmit = (name, desc, img, value) => {
             setRewardExists(true)
-            let tempReward = new Reward(name, desc, url, value)
+            let tempReward = new Reward(name, desc, 'image', value)
             setCurrentReward(tempReward)
-            updateReward(tempReward)
+            updateReward(tempReward, 0, img)
             }
     
             const [rewardName, setRewardName] = React.useState("");
@@ -146,7 +156,7 @@ export function DisplayReward(props) {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="descriptionInput" className="form-label">Image URL</label>
-                        <input type="imageURL" className="form-control" id="urlInput" value={imageURL} onChange={(e) => setImageURL(e.target.value)} required autoComplete="off"/>
+                        <input type="file" className="form-control" id="urlInput" accept=".png, .jpeg, .jpg" onChange={(e) => setImageURL(e.target.files[0])} required autoComplete="off"/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="starCountInput" className="form-label">Star Count</label>

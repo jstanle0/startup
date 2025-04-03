@@ -63,6 +63,11 @@ apiRouter.post('/home/reward', verify, async (req, res)=>{
         user.starCount += req.body.starChange;
         user.recentEvents = setRecentEvents(user, user.reward, "reward")
     }
+    if (req.body.image) {
+        await imageServer.uploadFile('image.png', req.body.image)
+        const fileName = await imageServer.readFile('image.png')
+        console.log(fileName)
+    }
     user.reward = req.body.reward;
     await DB.updateUser(user)
     res.status(200).send({reward: user.reward})
