@@ -54,6 +54,10 @@ export function DisplayReward(props) {
             body: formData,//JSON.stringify({reward: reward, starChange: starChange, image: imageBase64}),
             //headers: {'Content-Type': 'multipart/form-data'},
         })
+        if (response.ok) {
+            const body = await response.json()
+            setCurrentReward(body.reward)
+        }
         if (!response.ok) {
             setServerError(`Error ${response.status}: Unable to save reward.`)
         }
