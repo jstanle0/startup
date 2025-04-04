@@ -15,7 +15,7 @@ const s3 = new aws.S3();
 const upload = multer({
   storage: multers3({
     s3: s3,
-    acl: 'public-read',
+    //acl: 'public-read',
     bucket: 'shootforthestars',
     key: function(req, file, cb) {
       console.log(file);

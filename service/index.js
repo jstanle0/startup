@@ -59,18 +59,18 @@ apiRouter.get('/home/reward', verify, async (req, res) => {
     const user = res.locals.user;
     res.status(200).send({reward: user.reward})
 })
-apiRouter.post('/home/reward', verify, imageServer.upload.array('image', 1), async (req, res)=>{
+apiRouter.post('/home/reward', verify, imageServer.upload.single('image'), async (req, res)=>{
     const user = res.locals.user;
     if (req.body.starChange) {
-        user.starCount += req.body.starChange;
+        user.starCount += Number(req.body.starChange);
         user.recentEvents = setRecentEvents(user, user.reward, "reward")
     }
-    if (req.body.image) {
+    user.reward = JSON.parse(req.body.reward);
+    if (req.file) {
         /*await imageServer.uploadFile('image.png', req.body.image)
         const fileName = await imageServer.readFile('image.png')*/
-        console.log(fileName)
+        user.reward.url = `http://shootforthestars.s3-website.us-east-1.amazonaws.com/${req.file.originalname}`
     }
-    user.reward = req.body.reward;
     await DB.updateUser(user)
     res.status(200).send({reward: user.reward})
 })
