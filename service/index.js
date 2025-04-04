@@ -5,7 +5,9 @@ const cookieParser = require('cookie-parser');
 const DB = require('./database');
 const app = express();
 const { peerProxy } = require('./peerProxy');
-const imageServer = require('./imageServer')
+const imageServer = require('./imageServer');
+const multer = require('multer');
+const multers3 = require('multer-s3');
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -57,15 +59,15 @@ apiRouter.get('/home/reward', verify, async (req, res) => {
     const user = res.locals.user;
     res.status(200).send({reward: user.reward})
 })
-apiRouter.post('/home/reward', verify, async (req, res)=>{
+apiRouter.post('/home/reward', verify, imageServer.upload.array('image', 1), async (req, res)=>{
     const user = res.locals.user;
     if (req.body.starChange) {
         user.starCount += req.body.starChange;
         user.recentEvents = setRecentEvents(user, user.reward, "reward")
     }
     if (req.body.image) {
-        await imageServer.uploadFile('image.png', req.body.image)
-        const fileName = await imageServer.readFile('image.png')
+        /*await imageServer.uploadFile('image.png', req.body.image)
+        const fileName = await imageServer.readFile('image.png')*/
         console.log(fileName)
     }
     user.reward = req.body.reward;
@@ -155,12 +157,12 @@ async function findUser(field, value) {
     return await DB.getUser(value);
 }
 
-(async function testAWS() {
+/*(async function testAWS() {
     await imageServer.uploadFile('test.txt', 'Hello S3!');
     const data = await imageServer.readFile('test.txt');
 
     console.log(data);
-})()
+})()*/
 const server = app.listen(port, () => { console.log(`listening on port ${port}`) });
 
 peerProxy(server)

@@ -39,20 +39,20 @@ export function DisplayReward(props) {
     }, [])
 
     const updateReward = async (reward, starChange=0, image=null) => {
-        /*console.log(image.name)
+        /*console.log(image.name)*/
         const formData = new FormData()
         formData.append('reward',reward)
         formData.append('starChange', starChange)
-        formData.append('image', image)*/
-        let imageBase64 = 0
+        formData.append('image', image)
+        /*let imageBase64 = 0
         if (image) {
             const reader = new FileReader()
             imageBase64 = await reader.readAsDataURL(image)
-        }
+        }*/
         const response = await fetch('/api/home/reward', {
             method: 'post',
-            body: JSON.stringify({reward: reward, starChange: starChange, image: imageBase64}),
-            headers: {'Content-type': 'application/json; charset=UTF-8'},
+            body: {formData: formData},//JSON.stringify({reward: reward, starChange: starChange, image: imageBase64}),
+            headers: {'Content-type': 'multipart/form-data'},
         })
         if (!response.ok) {
             setServerError(`Error ${response.status}: Unable to save reward.`)

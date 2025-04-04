@@ -1,4 +1,33 @@
-const AWSClient = require('@aws-sdk/client-s3');
+const express = require('express');
+const aws = require('aws-sdk');
+const multer = require('multer');
+const multers3 = require('multer-s3');
+const config = require('./.aws/awsconfig.json');
+
+aws.config.update({
+  secretAccessKey: config.key,
+  accessKeyId: config.id,
+  region: 'us-east-1'
+})
+
+const s3 = new aws.S3();
+
+const upload = multer({
+  storage: multers3({
+    s3: s3,
+    acl: 'public-read',
+    bucket: 'shootforthestars',
+    key: function(req, file, cb) {
+      console.log(file);
+      cb(null, file.originalname);
+    }
+  })
+})
+
+module.exports = {
+  upload,
+}
+/*const AWSClient = require('@aws-sdk/client-s3');
 const credentialProvider = require('@aws-sdk/credential-providers');
 
 const s3 = new AWSClient.S3Client({
@@ -28,4 +57,4 @@ async function readFile(fileName) {
 module.exports = {
   uploadFile,
   readFile
-}
+}*/
