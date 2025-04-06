@@ -56,10 +56,19 @@ export function DisplayReward(props) {
         })
         if (response.ok) {
             const body = await response.json()
+            setServerError('')
             setCurrentReward(body.reward)
         }
         if (!response.ok) {
-            setServerError(`Error ${response.status}: Unable to save reward.`)
+            try {const body = await response.json()
+            if (body.type==="MulterError") {
+                setServerError('Error 406: File too large')
+                setRewardExists(false)
+            } else {
+                setServerError(`Error ${response.status}: Unable to save reward.`)
+            }} catch {
+                setServerError(`Error ${response.status}: Unable to save reward.`)
+            }
         }
     }
 

@@ -18,10 +18,13 @@ const upload = multer({
     //acl: 'public-read',
     bucket: 'shootforthestars',
     key: function(req, file, cb) {
-      console.log(file);
-      cb(null, file.originalname);
+      const filetype = file.originalname.split('.').pop();
+      const id = Math.round(Math.random() * 1e9);
+      const filename = `${id}.${filetype}`;
+      cb(null, filename);
     }
-  })
+  }),
+  limits: { fileSize: 500000 },
 })
 
 module.exports = {

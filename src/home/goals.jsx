@@ -46,6 +46,7 @@ export function CurrentGoals(props){
       if (response.ok) {
         const body = await response.json()
         setGoals(body.goals || [])
+        setServerError('')
       } else {
         setServerError(`Error ${response.status}: Unable to save goal.`)
       }

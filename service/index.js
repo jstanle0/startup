@@ -69,7 +69,7 @@ apiRouter.post('/home/reward', verify, imageServer.upload.single('image'), async
     if (req.file) {
         /*await imageServer.uploadFile('image.png', req.body.image)
         const fileName = await imageServer.readFile('image.png')*/
-        user.reward.url = `http://shootforthestars.s3-website.us-east-1.amazonaws.com/${req.file.originalname}`
+        user.reward.url = `http://shootforthestars.s3-website.us-east-1.amazonaws.com/${req.file.key}`
     }
     await DB.updateUser(user)
     res.status(200).send({reward: user.reward})
