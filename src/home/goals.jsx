@@ -77,7 +77,7 @@ export function CurrentGoals(props){
       return <div className='item-wrapper'>
         <div className='goal-title'>{goal.name}</div>
         {goal.date && 
-        (moment(goal.date, "MM/DD").isAfter(moment()) &&
+        (moment(goal.date, "MM/DD").isAfter(moment().subtract(1, 'days')) &&
         <div className='goal-caption'>{goal.date}</div>)
         || <div className='goal-caption text-secondary'>{goal.date}</div>
         }
