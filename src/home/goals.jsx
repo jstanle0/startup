@@ -76,7 +76,11 @@ export function CurrentGoals(props){
     function DisplayedGoal({goal, index}) {
       return <div className='item-wrapper'>
         <div className='goal-title'>{goal.name}</div>
-        <div className='goal-caption'>{goal.date}</div>
+        {goal.date && 
+        (moment(goal.date, "MM/DD").isAfter(moment()) &&
+        <div className='goal-caption'>{goal.date}</div>)
+        || <div className='goal-caption text-secondary'>{goal.date}</div>
+        }
         <div className='goal-counter'><img alt="star" src="/images/star.png" height="15" />{goal.count}</div>
         <button className='btn btn-outline-secondary' onClick={()=>{removeGoal(index)}}>Complete!</button>
       </div>
