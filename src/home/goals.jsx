@@ -111,16 +111,17 @@ export function CurrentGoals(props){
           subtitle.style.color = '#f00';
         }*/
        const handleSubmit = (e, name, date, count) => {
-        //e.preventDefault();
-        //if (name && date && count) {
+        e.preventDefault();
+        if (name && count) {
           addGoal(new Goal(name, date, count))
-        //}
-        setIsOpen(false)
+        }
+        setModalError("Invalid information")
        }
 
        const [goalName, setGoalName] = React.useState("");
        const [goalDate, setGoalDate] = React.useState("");
-       const [starValue, setStarValue] = React.useState("")
+       const [starValue, setStarValue] = React.useState("");
+       const [modalError, setModalError] = React.useState("");
   
     return (
       <div>
@@ -149,6 +150,7 @@ export function CurrentGoals(props){
               </div>
               <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit(e, goalName, goalDate, parseInt(starValue)) }>Submit</button>
               </form>
+              {modalError && <div className="badge text-bg-secondary">Error: {modalError}</div>}
         </Modal>
         </div>
     );
