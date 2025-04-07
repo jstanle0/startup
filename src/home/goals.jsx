@@ -2,6 +2,8 @@ import React from "react";
 import Modal from 'react-modal';
 import {Goal} from './goal';
 import { starCountContext, serverErrorContext } from "./home";
+import Datetime from 'react-datetime';
+import "react-datetime/css/react-datetime.css";
 
 export function CurrentGoals(props){
     const [goals, setGoals] = React.useState([]);
@@ -133,8 +135,10 @@ export function CurrentGoals(props){
                   <input type="goal" className="form-control" id="goalInput" value={goalName} onChange={(e) => setGoalName(e.target.value)} required autoComplete="off"/>
               </div>
               <div class="mb-3">
-                  <label htmlFor="descriptionInput" className="form-label">Description</label>
-                  <input type="description" className="form-control" id="descriptionInput" value={goalDesc} onChange={(e) => setGoalDesc(e.target.value)} required autoComplete="off"/>
+                  {/*<label htmlFor="descriptionInput" className="form-label">Description</label>
+                  <input type="description" className="form-control" id="descriptionInput" value={goalDesc} onChange={(e) => setGoalDesc(e.target.value)} required autoComplete="off"/>*/}
+                  <label htmlFor="dateInput" className="form-label">Due Date</label>
+                  <Datetime id="dateInput" isValidDate={ valid }/>
               </div>
               <div class="mb-3">
                   <label htmlFor="starCountInput" className="form-label">Star Count</label>
