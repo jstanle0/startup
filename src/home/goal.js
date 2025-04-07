@@ -1,7 +1,7 @@
 export class Goal {
-    constructor(name, description, count) {
+    constructor(name, date, count) {
         this.name = name;
-        this.description = description;
+        this.date = date;
         this.count = count;
     }
 }

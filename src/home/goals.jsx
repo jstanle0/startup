@@ -4,6 +4,7 @@ import {Goal} from './goal';
 import { starCountContext, serverErrorContext } from "./home";
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
+import moment from "moment";
 
 export function CurrentGoals(props){
     const [goals, setGoals] = React.useState([]);
@@ -75,7 +76,7 @@ export function CurrentGoals(props){
     function DisplayedGoal({goal, index}) {
       return <div className='item-wrapper'>
         <div className='goal-title'>{goal.name}</div>
-        <div className='goal-caption'>{goal.description}</div>
+        <div className='goal-caption'>{goal.date}</div>
         <div className='goal-counter'><img alt="star" src="/images/star.png" height="15" />{goal.count}</div>
         <button className='btn btn-outline-secondary' onClick={()=>{removeGoal(index)}}>Complete!</button>
       </div>
@@ -109,14 +110,16 @@ export function CurrentGoals(props){
           // references are now sync'd and can be accessed.
           subtitle.style.color = '#f00';
         }*/
-       const handleSubmit = (name, description, count) => {
-        if (name && description && count) {
-          addGoal(new Goal(name, description, count))
-        } 
+       const handleSubmit = (e, name, date, count) => {
+        //e.preventDefault();
+        //if (name && date && count) {
+          addGoal(new Goal(name, date, count))
+        //}
+        setIsOpen(false)
        }
 
        const [goalName, setGoalName] = React.useState("");
-       const [goalDesc, setGoalDesc] = React.useState("");
+       const [goalDate, setGoalDate] = React.useState("");
        const [starValue, setStarValue] = React.useState("")
   
     return (
@@ -138,13 +141,13 @@ export function CurrentGoals(props){
                   {/*<label htmlFor="descriptionInput" className="form-label">Description</label>
                   <input type="description" className="form-control" id="descriptionInput" value={goalDesc} onChange={(e) => setGoalDesc(e.target.value)} required autoComplete="off"/>*/}
                   <label htmlFor="dateInput" className="form-label">Due Date</label>
-                  <Datetime id="dateInput" isValidDate={ valid }/>
+                  <Datetime id="dateInput" timeFormat={false} value={goalDate} onChange={(e)=>{try {setGoalDate(moment(e._d).format("MM/DD"))} catch {setGoalDate("")}}}/>
               </div>
               <div class="mb-3">
                   <label htmlFor="starCountInput" className="form-label">Star Count</label>
                   <input type="number" className="form-control" id="starCountInput" value={starValue} onChange={(e)=> setStarValue(e.target.value)} required autoComplete="off"/>
               </div>
-              <button type="submit" className="btn btn-primary" onClick={()=>handleSubmit(goalName, goalDesc, parseInt(starValue)) }>Submit</button>
+              <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit(e, goalName, goalDate, parseInt(starValue)) }>Submit</button>
               </form>
         </Modal>
         </div>
