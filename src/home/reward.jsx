@@ -39,20 +39,13 @@ export function DisplayReward(props) {
     }, [])
 
     const updateReward = async (reward, starChange=0, image=null) => {
-        /*console.log(image.name)*/
         const formData = new FormData()
         formData.append('reward',JSON.stringify(reward))
         formData.append('starChange', starChange)
         formData.append('image', image)
-        /*let imageBase64 = 0
-        if (image) {
-            const reader = new FileReader()
-            imageBase64 = await reader.readAsDataURL(image)
-        }*/
         const response = await fetch('/api/home/reward', {
             method: 'post',
-            body: formData,//JSON.stringify({reward: reward, starChange: starChange, image: imageBase64}),
-            //headers: {'Content-Type': 'multipart/form-data'},
+            body: formData,
         })
         if (response.ok) {
             const body = await response.json()
@@ -93,7 +86,7 @@ export function DisplayReward(props) {
     <div className="card mb-3" style={{maxWidth: '540px', border: 'none'}}>
         <div className="row g-0">
             <div className="col-md-4 bg-primary rounded-start" style={{display: 'flex', alignItems: 'center'}}>      
-            <img src={reward.url} onError={(e)=>{e.target.onError = null; e.target.src = catImage}} width='100px' alt={reward.url}/>
+            <img src={reward.url} onError={(e)=>{e.target.onError = null; e.target.src = catImage}} className='img-fluid' style={{maxHeight: 400}} alt={reward.url}/>
             </div>
             <div className="col-md-8">
                 <div className="card-body bg-warning rounded-end">

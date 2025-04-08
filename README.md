@@ -49,8 +49,8 @@ sequenceDiagram
 
 ### Key features
 
-- __Treat yourself!__ Pick a reward, write a discription of it, add a photo -- Whatever helps you remember why your're achieving your goals.
-- __Set goals!__ Set goals to earn stars, with customization for repeating or long-term goals.
+- __Treat yourself!__ Pick a reward, write a description of it, add a photo -- Whatever helps you remember why your're achieving your goals.
+- __Set goals!__ Set goals to earn stars, and add a due date to help you complete them.
 - __Share with friends!__ Proud of your achivements? Post them to the community on the community board!
 
 ### Technologies
@@ -142,5 +142,5 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Backend listens for WebSocket connection** - Backend listens for WebSocket connections and regularly checks if the connection is alive
 - [x] **Frontend makes WebSocket connection** - Frontend connects to the WebSocket
 - [x] **Data sent over WebSocket connection** - Post objects are sent through WebSocket and recived by other users
-- [x] **WebSocket data displayed** - Post objects are then processed and displayed.
+- [x] **WebSocket data displayed** - Post objects are then processed and displayed, including images saved to a public s3 bucket.
 - [x] **Application is fully functional** - Everything works! :)

@@ -14,8 +14,8 @@ export function About() {
     </p>
     <h3>Key Features: </h3>
     <ul>
-        <li><b>Treat yourself!</b> Pick a reward, write a discription of it, add a photo -- Whatever helps you remember why your're achieving your goals.</li>
-        <li><b>Set goals!</b> Set goals to earn stars, with customization for repeating or long-term goals.</li>
+        <li><b>Treat yourself!</b> Pick a reward, write a description of it, add a photo -- Whatever helps you remember why your're achieving your goals.</li>
+        <li><b>Set goals!</b> Set goals to earn stars, and add a due date to help you complete them.</li>
         <li><b>Share with friends!</b> Proud of your achivements? Post them to the community on the community board!</li>
     </ul>
 </main>;
