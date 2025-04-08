@@ -6,8 +6,6 @@ const DB = require('./database');
 const app = express();
 const { peerProxy } = require('./peerProxy');
 const imageServer = require('./imageServer');
-const multer = require('multer');
-const multers3 = require('multer-s3');
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -61,14 +59,13 @@ apiRouter.get('/home/reward', verify, async (req, res) => {
 })
 apiRouter.post('/home/reward', verify, imageServer.upload.single('image'), async (req, res)=>{
     const user = res.locals.user;
-    if (req.body.starChange) {
+    if (Number(req.body.starChange)) {
         user.starCount += Number(req.body.starChange);
         user.recentEvents = setRecentEvents(user, user.reward, "reward")
+        user.prevImage = user.reward.url
     }
     user.reward = JSON.parse(req.body.reward);
     if (req.file) {
-        /*await imageServer.uploadFile('image.png', req.body.image)
-        const fileName = await imageServer.readFile('image.png')*/
         user.reward.url = `http://shootforthestars.s3-website.us-east-1.amazonaws.com/${req.file.key}`
     }
     await DB.updateUser(user)
@@ -87,7 +84,7 @@ function setRecentEvents(user, event, name) {
 }
 apiRouter.get('/community/recentEvents', verify, async (req, res) => {
     const user = res.locals.user;
-    res.status(200).send({recentEvents: user.recentEvents})
+    res.status(200).send({recentEvents: user.recentEvents, curImage: user.reward.url, prevImage: user.prevImage})
 })
 apiRouter.post('/community/post', verify, async (req, res) =>{
     let post = req.body.post
@@ -157,12 +154,6 @@ async function findUser(field, value) {
     return await DB.getUser(value);
 }
 
-/*(async function testAWS() {
-    await imageServer.uploadFile('test.txt', 'Hello S3!');
-    const data = await imageServer.readFile('test.txt');
-
-    console.log(data);
-})()*/
 const server = app.listen(port, () => { console.log(`listening on port ${port}`) });
 
 peerProxy(server)

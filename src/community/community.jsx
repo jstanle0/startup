@@ -8,13 +8,30 @@ import { usernameContext } from '../app';
 export function Community() {
     const [posts, setPosts] = React.useState([]);
     const [recentEvents, setRecentEvents] = React.useState('')
+    const [images, setImages] = React.useState([])
     const {username, setUsername} = React.useContext(usernameContext)
     
     async function getRecentEvents() {
+      async function appendImage(image) {
+        if (image[1]) {
+          images.push(image)
+        } else {
+          const response = await fetch('https://cataas.com/cat?json=true&width=100', {
+            method: 'get',
+            headers: {'Content-type': 'application/json'}
+        })
+        if (response.ok) {
+            const body = await response.json()
+            images.push(["Cat Image", body.url])
+        }
+        }
+      }
       const response = await fetch('/api/community/recentEvents', {method: 'get'})
       if (response.ok) {
         const body = await response.json()
         setRecentEvents(body.recentEvents)
+        await appendImage(["Current reward image", body.curImage])
+        await appendImage(["Previous reward image", body.prevImage])
       }
     }
 
@@ -114,8 +131,9 @@ export function Community() {
                 <textarea className="form-control" placeholder="Leave a comment here" id="modalTextarea" required autoComplete="off" value={comments} onChange={(e)=>setComments(e.target.value)}></textarea>
               </div>
               <div className="mb-3">
-                        <label htmlFor="descriptionInput" className="form-label">Image URL</label>
-                        <input type="imageURL" className="form-control" id="urlInput" required autoComplete="off" value={imageURL} onChange={(e)=>setImageURL(e.target.value)}/>
+                        <label htmlFor="descriptionInput" className="form-label">Image</label>
+                        {images.map((i, index)=> {return <div><input type="radio" className="form-check-input" name="image" value={i[1]} id={`radio${index}`} checked={imageURL === i[1]} onChange={(e)=>setImageURL(e.target.value)}/>
+                        <label htmlFor={`radio${index}`} className="form-check-label">{i[0]}</label></div>})}
                     </div>
               <button type="submit" className="btn btn-warning" style={{"maxWidth": "200px"}} disabled={!selectedEvent||!comments||!imageURL}>Post it!</button>
 
