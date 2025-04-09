@@ -33,11 +33,9 @@ export default function App() {
         </usernameContext.Provider>
     </BrowserRouter>;
 async function logout() {
-    fetch ('/api/account/logout', {method: 'delete'})
-        .then(() => {
-            setAuthenticated(false)
-            localStorage.removeItem('username')
-        })
+    localStorage.removeItem('username');
+    setAuthenticated(false);
+    fetch ('/api/account/logout', {method: 'delete'});
 }
 
 function Header() {

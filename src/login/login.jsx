@@ -12,9 +12,13 @@ export function Login() {
     const [displayError, setDisplayError] = React.useState('');
     const navigate = useNavigate();
 
-    if (authenticated) {
-        React.useEffect(() =>navigate('/home'), [])
-    }
+    React.useEffect(() =>{
+        if (authenticated) {
+            navigate('/home')
+        } else {
+            navigate('/')
+        }
+    }, [authenticated])
     
     async function processLogin(e) {
         e.preventDefault();

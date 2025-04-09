@@ -41,7 +41,7 @@ export function DisplayReward(props) {
         setRewardExists(false);
         props.setRemoveReward(false);
     }, [props.removeReward])
-    
+
     const updateReward = async (reward, starChange=0, image=null) => {
         const formData = new FormData()
         formData.append('reward',JSON.stringify(reward))
@@ -158,14 +158,14 @@ export function DisplayReward(props) {
                 <form onSubmit={()=>handleSubmit(rewardName, rewardDesc, imageURL, parseInt(starValue))}>
                     <div className="mb-3">
                         <label htmlFor="goalInput" className="form-label">Reward</label>
-                        <input type="goal" className="form-control" id="goalInput" value={rewardName} onChange={(e) => setRewardName(e.target.value)} required autoComplete="off"/>
+                        <input type="text" className="form-control" id="goalInput" value={rewardName} onChange={(e) => setRewardName(e.target.value)} required autoComplete="off"/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="descriptionInput" className="form-label">Description</label>
-                        <input type="description" className="form-control" id="descriptionInput" value={rewardDesc} onChange={(e) => setRewardDesc(e.target.value)} required autoComplete="off"/>
+                        <textarea className="form-control" id="descriptionInput" value={rewardDesc} onChange={(e) => setRewardDesc(e.target.value)} required autoComplete="off"/>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="descriptionInput" className="form-label">Image</label>
+                        <label htmlFor="urlInput" className="form-label">Image</label>
                         <input type="file" className="form-control" id="urlInput" accept=".png, .jpeg, .jpg" onChange={(e) => setImageURL(e.target.files[0])} autoComplete="off"/>
                     </div>
                     <div className="mb-3">

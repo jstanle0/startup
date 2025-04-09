@@ -17,15 +17,14 @@
     align-self: flex-end;
     position: sticky;
     top: 50px;
-    
     z-index: 2;
 }
 /*.star-counter:hover {
     opacity: .5;
 }*/
-/*.star-counter > p {
+/*.star-counter > * {
     background-color: #DA627D;
-    margin: 10px;
+    margin-right: 10px;
 }*/
 .goal-container {
     display: flex;

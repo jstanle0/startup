@@ -72,7 +72,7 @@ export function Home() {
     <div className="home-content-container">
         <span className="star-counter">
             <img src={starSrc} alt="star" height="30" className='bg-secondary'/><p className='bg-secondary d-inline'> Number of stars: <b className='bg-secondary text-warning'>{starCount}</b></p>
-            <div className="dropdown d-inline bg-secondary">
+            <div className="dropdown d-inline bg-secondary" style={{marginLeft: '.5em'}}>
                 <button className="btn btn-primary dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Options
                 </button>
