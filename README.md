@@ -139,8 +139,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **Backend listens for WebSocket connection** - Backend listens for WebSocket connections and regularly checks if the connection is alive
-- [x] **Frontend makes WebSocket connection** - Frontend connects to the WebSocket
+- [x] **Backend listens for WebSocket connection** - Backend listens for WebSocket connections and regularly checks if the connection is alive, found in `peerproxy.js`.
+- [x] **Frontend makes WebSocket connection** - Frontend connects to the WebSocket, found in `postNotifier.js`.
 - [x] **Data sent over WebSocket connection** - Post objects are sent through WebSocket and recived by other users
-- [x] **WebSocket data displayed** - Post objects are then processed and displayed, including images saved to a public s3 bucket.
+- [x] **WebSocket data displayed** - Post objects are then processed and displayed, including images saved to a public s3 bucket and forwarded through cloudfront. Found in `community.jsx`.
 - [x] **Application is fully functional** - Everything works! :)
