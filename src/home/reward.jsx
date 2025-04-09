@@ -23,7 +23,7 @@ export function DisplayReward(props) {
         }
     }
     const getCatImage = async()=>{
-        const response = await fetch('https://cataas.com/cat?json=true&width=100', {
+        const response = await fetch('https://cataas.com/cat?json=true&width=200', {
             method: 'get',
             headers: {'Content-type': 'application/json'}
         })
@@ -37,7 +37,11 @@ export function DisplayReward(props) {
         getReward();
         getCatImage();
     }, [])
-
+    React.useEffect(()=>{
+        setRewardExists(false);
+        props.setRemoveReward(false);
+    }, [props.removeReward])
+    
     const updateReward = async (reward, starChange=0, image=null) => {
         const formData = new FormData()
         formData.append('reward',JSON.stringify(reward))
@@ -161,8 +165,8 @@ export function DisplayReward(props) {
                         <input type="description" className="form-control" id="descriptionInput" value={rewardDesc} onChange={(e) => setRewardDesc(e.target.value)} required autoComplete="off"/>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="descriptionInput" className="form-label">Image URL</label>
-                        <input type="file" className="form-control" id="urlInput" accept=".png, .jpeg, .jpg" onChange={(e) => setImageURL(e.target.files[0])} required autoComplete="off"/>
+                        <label htmlFor="descriptionInput" className="form-label">Image</label>
+                        <input type="file" className="form-control" id="urlInput" accept=".png, .jpeg, .jpg" onChange={(e) => setImageURL(e.target.files[0])} autoComplete="off"/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="starCountInput" className="form-label">Star Count</label>

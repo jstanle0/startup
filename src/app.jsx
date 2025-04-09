@@ -1,5 +1,6 @@
 import React from 'react';
 import './custom_bootstrap.css';
+import 'bootstrap/js/dist/dropdown';
 import './app.css';
 
 import { BrowserRouter, NavLink, Route, Routes, useNavigate } from 'react-router-dom';

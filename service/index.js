@@ -37,6 +37,12 @@ apiRouter.get('/home/goals', verify, async (req, res)=>{
     const user = res.locals.user;
     res.status(200).send({goals: user.goals})
 })
+apiRouter.delete('/home/goals', verify, async (req, res)=>{
+    const user = res.locals.user;
+    user.goals = [];
+    await DB.updateUser(user);
+    res.status(200).send({goals: user.goals})
+})
 apiRouter.delete('/home/goal', verify, async (req, res) => {
     const user = res.locals.user;
     user.recentEvents = setRecentEvents(user, user.goals[req.body.index], "goal");
@@ -51,6 +57,12 @@ apiRouter.get('/home/starCount', verify, async (req,res)=>{
         user.starCount = 0;
         await DB.updateUser(user);
     }
+    res.status(200).send({starCount: user.starCount});
+})
+apiRouter.delete('/home/starCount', verify, async (req,res)=>{
+    const user = res.locals.user;
+    user.starCount = 0;
+    await DB.updateUser(user);
     res.status(200).send({starCount: user.starCount});
 })
 apiRouter.get('/home/reward', verify, async (req, res) => {
@@ -68,6 +80,12 @@ apiRouter.post('/home/reward', verify, imageServer.upload.single('image'), async
     if (req.file) {
         user.reward.url = `http://shootforthestars.s3-website.us-east-1.amazonaws.com/${req.file.key}`
     }
+    await DB.updateUser(user)
+    res.status(200).send({reward: user.reward})
+})
+apiRouter.delete('/home/reward', verify, async (req, res)=>{
+    const user = res.locals.user;
+    user.reward = ''
     await DB.updateUser(user)
     res.status(200).send({reward: user.reward})
 })

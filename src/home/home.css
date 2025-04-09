@@ -13,20 +13,20 @@
     border:solid 2px #0a0908; 
     border-radius:1em;
     font-size: 1.5em;
-    max-width: 225px;
+    max-width: 325px;
     align-self: flex-end;
     position: sticky;
     top: 50px;
     
     z-index: 2;
 }
-.star-counter:hover {
+/*.star-counter:hover {
     opacity: .5;
-}
-.star-counter * {
+}*/
+/*.star-counter > p {
     background-color: #DA627D;
-    color: #F1C40F;
-}
+    margin: 10px;
+}*/
 .goal-container {
     display: flex;
     width: 100vw;

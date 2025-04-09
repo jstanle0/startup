@@ -25,6 +25,11 @@ export function CurrentGoals(props){
       getGoals()
     }, [])
 
+    React.useEffect(()=>{
+      setGoals([])
+      props.setRemoveGoals(false)
+    }, [props.removeGoals])
+
     const addGoal = async (newGoal) => {
         setGoals(()=> {
           let newGoals = [...goals, newGoal]
