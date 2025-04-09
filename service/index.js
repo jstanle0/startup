@@ -78,7 +78,7 @@ apiRouter.post('/home/reward', verify, imageServer.upload.single('image'), async
     }
     user.reward = JSON.parse(req.body.reward);
     if (req.file) {
-        user.reward.url = `http://shootforthestars.s3-website.us-east-1.amazonaws.com/${req.file.key}`
+        user.reward.url = `https://du0adf8wti6gc.cloudfront.net/${req.file.key}`
     }
     await DB.updateUser(user)
     res.status(200).send({reward: user.reward})
